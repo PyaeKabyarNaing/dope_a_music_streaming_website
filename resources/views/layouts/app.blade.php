@@ -16,7 +16,7 @@
     </head>
     <body class="font-sans antialiased">
         <!-- whole page -->
-        <div class="min-h-screen bg-white"> 
+        <div class="min-h-screen bg-[#0D0F1A]"> 
 
             <!-- sidebar -->
             @include('layouts.sidebar')
