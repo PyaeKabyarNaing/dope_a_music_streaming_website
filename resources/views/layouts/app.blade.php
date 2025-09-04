@@ -15,9 +15,14 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900"> <!-- whole page -->
+        <!-- whole page -->
+        <div class="min-h-screen bg-white"> 
+
+            <!-- sidebar -->
             @include('layouts.sidebar')
-            @include('layouts.navigation')
+
+            <!-- navbar -->
+            {{-- @include('layouts.navigation') --}}
 
             <!-- Page Heading -->
             {{-- @isset($header)

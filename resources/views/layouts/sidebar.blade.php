@@ -1,18 +1,44 @@
 <!-- resources/views/layouts/sidebar.blade.php -->
+<!-- whole sidebar -->
 <div x-data="{ open: false }" 
-     class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out z-20">
+     class="absolute bg-black inset-y-0 left-0 w-[25%] h-full pr-2 flex-col gap-2 text-white hidden lg:flex transform transition-transform duration-300 ease-in-out z-20">
+     <div class="h-[15%] rounded flex flex-col justify-around">
 
     <!-- Logo -->
-    <div class="h-16 flex items-center justify-center border-b border-gray-200 dark:border-gray-700 bg-black">
+    <div class="h-16 flex items-center pl-8">
         <a href="{{ route('home') }}">
-            <x-application-logo class="h-9 w-auto fill-current text-gray-800 dark:text-gray-200"/>
+            <x-application-logo class="h-9 w-auto"/>
         </a>
     </div>
 
     <!-- Sidebar Links -->
-    <nav class="mt-6 px-4 space-y-2">
-        <a href="{{ route('home') }}" class="block py-2 px-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">Home</a>
-        <a href="{{ route('profile.edit') }}" class="block py-2 px-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">Profile</a>
-        <a href="{{ route('logout') }}" class="block py-2 px-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">Logout</a>
+    <nav class="flex items-center gap-3 pl-8 cursor-pointer">
+        <img src="" alt="icon">
+        <a href="{{ route('home') }}">Home</a>
     </nav>
+
+    <nav class="flex items-center gap-3 pl-8 cursor-pointer">
+        <a href="{{ route('profile.edit') }}">Profile</a>
+    </nav>
+
+    <nav class="flex items-center gap-3 pl-8 cursor-pointer">
+        <a href="{{ route('logout') }}">Logout</a>
+    </nav>
+    </div>
+
+    <div class="h-[85%] rounded">
+        <h1>Subscriptions</h1>
+        <div class="p-4 flex items-center justify-between">
+            <nav class="flex items-center gap-3">
+                <img src="" alt="profile">
+                <a href="{{ route('logout') }}">Artist Name</a>
+            </nav>
+        </div>
+
+        <div class="p-4 bg-[#242424] m-2 rounded flex flex-col items-start justify-start gap-1 pl-4">
+            <h1>Create your first playlist</h1>
+            <p>It's easy we'll help you</p>
+            <button class="px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4">Create Playlist</button>
+        </div>
+    </div>
 </div>
