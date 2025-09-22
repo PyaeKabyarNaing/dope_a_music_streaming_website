@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('artist_name');
             $table->string('ft_artist_name')->nullable();
-            $table->integer('release_year')->nullable();
-            $table->string('duration')->nullable();
+            $table->date('release_date')->nullable();
+            $table->time('duration')->nullable();
             $table->timestamps();
-            $table->foreignId('album_id')
+            $table->foreignId('album_id')->nullable()
             ->constrained('albums')
             ->onDelete('cascade');
         });

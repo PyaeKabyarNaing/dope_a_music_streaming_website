@@ -9,13 +9,17 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+    darkMode: 'class',
+
     theme: {
         extend: {
             fontFamily: {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                dark: '#0D0F1A',
+                dark: {
+                    DEFAULT: '#0D0F1A',
+                },
             }
         },
     },

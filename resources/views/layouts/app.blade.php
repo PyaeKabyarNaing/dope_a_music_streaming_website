@@ -15,15 +15,17 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased bg-dark">
+    <body class="font-sans antialiased dark:bg-dark dark:text-white bg-white text-black">
         <!-- whole page -->
         <div class="min-h-screen"> 
 
+            <!-- navbar -->
+            <div class="z-30">
+            @include('layouts.navigation')
+            </div>
+
             <!-- sidebar -->
             @include('layouts.sidebar')
-
-            <!-- navbar -->
-            @include('layouts.navigation')
 
             <!-- Page Heading -->
             {{-- @isset($header)
@@ -35,9 +37,14 @@
             @endisset --}}
 
             <!-- Page Content -->
-            <main>
+            <main class="ml-[21%] mb-[10%] mt-[8%]">
                 {{ $slot }}
             </main>
+
+            <!-- listbar -->
+            <div class="">
+            @include('layouts.listbar')
+            </div>
 
             <!-- audio player -->
             @include('layouts.bottom')

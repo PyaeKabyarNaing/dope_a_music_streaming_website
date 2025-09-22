@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('songs.index');
 })->name('home');
 
+Route::get('/detail', function () {
+    return view('songs.detail');
+})->name('detail'); // replace with dynamic route by song_id
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

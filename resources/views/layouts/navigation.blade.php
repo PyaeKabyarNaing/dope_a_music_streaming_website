@@ -1,9 +1,17 @@
 <nav x-data="{ open: false }" 
-     class="bg-black flex justify-between items-center sm:w-full md:w-4/5 ml-auto">
+     class="dark:bg-black bg-white fixed flex justify-between items-center ml-auto z-20 w-full top-0">
 
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
+            
+            <!-- Logo -->
+            <div class="h-16 flex mb-2 mt-2">
+                <a href="{{ route('home') }}">
+                    <x-application-logo/>
+                </a>
+            </div>
+            
             <div class="flex">
 
                 <!-- Navigation Links -->
