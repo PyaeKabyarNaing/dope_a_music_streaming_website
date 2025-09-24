@@ -2,6 +2,8 @@
 <!-- whole sidebar -->
 <div class="fixed dark:bg-black bg-white inset-y-0 left-0 w-[20%] h-full pr-2 flex-col gap-2 hidden sm:block transform transition-transform duration-300 ease-in-out z-10 pl-7 border-r-4 border-gray-500">
 
+<x-logo/>
+
     <div class="h-[10%]"></div>
 
      <div class="h-[15%] rounded flex flex-col justify-around gap-2">

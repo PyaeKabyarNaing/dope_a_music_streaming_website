@@ -21,7 +21,7 @@
 
             <!-- navbar -->
             <div class="z-30">
-            @include('layouts.navigation')
+            @include('layouts.nav')
             </div>
 
             <!-- sidebar -->
@@ -40,11 +40,6 @@
             <main class="ml-[21%] mb-[10%] mt-[8%]">
                 {{ $slot }}
             </main>
-
-            <!-- listbar -->
-            <div class="">
-            @include('layouts.listbar')
-            </div>
 
             <!-- audio player -->
             @include('layouts.bottom')
