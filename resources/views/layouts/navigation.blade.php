@@ -8,7 +8,7 @@
             <!-- Logo -->
             <div class="h-16 flex mb-2 mt-2">
                 <a href="{{ route('home') }}">
-                    <x-application-logo/>
+                    <x-internal-logo/>
                 </a>
             </div>
             

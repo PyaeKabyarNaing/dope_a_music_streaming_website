@@ -33,7 +33,7 @@
                 <img class="rounded-t w-[160px] h-[160px]" src="https://images.unsplash.com/photo-1755371034010-51c25321312d?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
                 </div>
                     <p class="font-bold mt-2 mb-1">Song Name</p>
-                    <p class="text-slate-200 text-sm">Artist Name</p>
+                    <p class="text-sm">Artist Name</p>
                 </div>
                 <div class="min-w-[160px] cursor-pointer hover:bg-[#ffffff26] dark:bg-gray-800/10 bg-gray-500/10 m-2 mx-2">
                 <div class="w-[160px] h-[160px] overflow-hidden">
@@ -121,9 +121,11 @@
             </div>
         </div>
 
+        <div class="h-[79px]"></div>
+
     {{-- </div> --}}
 
-    <x-primary-button>Button</x-primary-button>
+    {{-- <x-primary-button>Button</x-primary-button>
     <x-secondary-button>Button</x-secondary-button>
     <x-danger-button>Button</x-danger-button>
     <x-responsive-nav-link href="#" :active="true">Link</x-responsive-nav-link>
@@ -133,5 +135,5 @@
 
     <x-input-label for="input" :value="__('Input Label')" />
     <x-text-input placeholder="Input"/>
-    <x-input-error :messages="['Error message']" class="" />
+    <x-input-error :messages="['Error message']" class="" /> --}}
 </x-app-layout>
