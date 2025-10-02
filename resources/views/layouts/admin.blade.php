@@ -21,15 +21,15 @@
 
             <!-- navbar -->
             <div class="z-30">
-            @include('layouts.nav')
+            @include('layouts.adminnav')
             </div>
 
             <!-- sidebar -->
-            @include('layouts.sidebar')
+            @include('layouts.adminsidebar')
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white dark:bg-gray-800 shadow ml-[21%] mt-[8%]">
+                <header class="bg-white dark:bg-gray-800 shadow mt-[8%] ml-[21%]">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -42,7 +42,7 @@
             </main>
 
             <!-- audio player -->
-            @include('layouts.bottom')
+            {{-- @include('layouts.bottom') --}}
         </div>
     </body>
 </html>

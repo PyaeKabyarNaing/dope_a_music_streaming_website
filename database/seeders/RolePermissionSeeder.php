@@ -16,24 +16,27 @@ class RolePermissionSeeder extends Seeder
     public function run(): void
     {
         // creating permissions
-        Permission::create(['name' => 'create songs']);
-        Permission::create(['name' => 'delete songs']);
-        Permission::create(['name' => 'edit songs']);
-        Permission::create(['name' => 'view songs']);
-        Permission::create(['name' => 'create users']);
-        Permission::create(['name' => 'ban users']);
-        Permission::create(['name' => 'delete users']);
-        Permission::create(['name' => 'view users']);
-        Permission::create(['name' => 'update users']);
+        $permission_create_song = Permission::create(['name' => 'create song']);
+        $permission_delete_song = Permission::create(['name' => 'delete song']);
+        $permission_edit_song = Permission::create(['name' => 'edit song']);
+        $permission_view_song = Permission::create(['name' => 'view song']);
+        $permission_create_user = Permission::create(['name' => 'create user']);
+        $permission_ban_user = Permission::create(['name' => 'ban user']);
+        $permission_delete_user = Permission::create(['name' => 'delete user']);
+        $permission_view_user = Permission::create(['name' => 'view user']);
+        $permission_update_user = Permission::create(['name' => 'update user']);
 
         // Create roles and assign existing permissions
-        $role = Role::create(['name' => 'listener']);
-        $role->givePermissionTo('view songs');
+        $role_listener = Role::create(['name' => 'listener']);
+        $role_listener->givePermissionTo('view song');
 
-        $role = Role::create(['name' => 'artist']);
-        $role->givePermissionTo('view songs', 'create songs', 'edit songs', 'delete songs');
+        $role_artist = Role::create(['name' => 'artist']);
+        $role_artist->syncPermissions('view song', 'create song', 'edit song', 'delete song');
 
-        $role = Role::create(['name' => 'admin']);
-        $role->givePermissionTo(Permission::all());
+        $role_admin = Role::create(['name' => 'admin']);
+        $role_admin->syncPermissions(Permission::all());
+
+        $user = User::find(1);
+        $user->assignRole($role_admin);
     }
 }

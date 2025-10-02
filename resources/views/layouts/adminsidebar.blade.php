@@ -6,7 +6,7 @@
 
     <div class="h-[10%]"></div>
 
-     <div class="h-[20%] rounded flex flex-col justify-around gap-2">
+     <div class="h-[15%] rounded flex flex-col justify-around gap-2">
 
     <!-- Sidebar Links -->
     <nav class="flex items-center gap-3 cursor-pointer">
@@ -16,12 +16,7 @@
 
     <nav class="flex items-center gap-3 cursor-pointer">
         <x-home-icon/>
-        <a href="{{ route('playlist.edit') }}">Playlists</a>
-    </nav>
-
-    <nav class="flex items-center gap-3 cursor-pointer">
-        <x-home-icon/>
-        <a href="{{ route('history.view') }}">History</a>
+        <a href="{{ route('profile.edit') }}">Profile</a>
     </nav>
 
 <form method="POST" action="{{ route('logout') }}" class="flex items-center gap-3 cursor-pointer text-red-500">
