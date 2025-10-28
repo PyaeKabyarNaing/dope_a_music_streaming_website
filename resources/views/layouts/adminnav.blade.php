@@ -4,10 +4,10 @@
 <div class="flex justify-between items-center pt-2 pl-7 pb-1 pr-7">
     {{-- logo --}}
     <div>
-    <a href="{{ route('admin') }}" class="hidden dark:block">
+    <a href="{{ route('admins.index') }}" class="hidden dark:block">
     <x-dark-logo/>
     </a>
-    <a href="{{ route('admin') }}" class="block dark:hidden">
+    <a href="{{ route('admins.index') }}" class="block dark:hidden">
     <x-light-logo/>
     </a>
     </div>
@@ -32,7 +32,7 @@
     <x-setting-icon/>
     </a>
 
-    <a href="#">
+    <a href="{{ route('profile.edit') }}">
         <div class="w-[35px] h-[35px] rounded-full overflow-hidden">
                 <img class="rounded-full w-[35px] h-auto object-scale-down" src="https://images.unsplash.com/photo-1756838197413-07f174def66c?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="profile">
                 </div>

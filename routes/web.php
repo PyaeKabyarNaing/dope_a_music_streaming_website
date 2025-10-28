@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,9 +31,14 @@ Route::middleware('auth')->group(function () {
 });
 
 // admin
-Route::get('/admin', function () {
-    return view('admins.index');
-})->name('admin');
+// Route::get('/admins', function () {
+//     return view('admins.index');
+// })->name('admin');
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admins', [UserController::class, 'index'])->name('admins.index');
+    Route::post('/admins/{user}/roles', [UserController::class, 'updateRoles'])->name('admins.updateRoles');
+});
 
 require __DIR__.'/auth.php';
 
@@ -40,3 +46,7 @@ require __DIR__.'/auth.php';
 Route::get('/admin/user/create', function () {
     return view('admin.create-user');
 })->middleware(['auth', 'verified', 'can:create user'])->name('user.create');
+
+Route::get('/background', function () {
+    return view('components.background');
+})->name('background');

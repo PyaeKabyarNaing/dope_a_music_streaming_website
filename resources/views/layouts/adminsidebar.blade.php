@@ -11,7 +11,7 @@
     <!-- Sidebar Links -->
     <nav class="flex items-center gap-3 cursor-pointer">
         <x-home-icon/>
-        <a href="{{ route('home') }}">Home</a>
+        <a href="{{ route('admins.index') }}">Home</a>
     </nav>
 
     <nav class="flex items-center gap-3 cursor-pointer">
