@@ -29,15 +29,15 @@
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white dark:bg-gray-800 shadow ml-[21%] mt-[8%]">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <header class="shadow ml-[21%] mt-[8%]">
+                    <div class="max-w-7xl mx-auto pt-6">
                         {{ $header }}
                     </div>
                 </header>
             @endisset
 
             <!-- Page Content -->
-            <main class="ml-[21%] mb-[10%]">
+            <main class="ml-[21%] mb-[10%] mt-[8%]">
                 {{ $slot }}
             </main>
 

@@ -6,11 +6,12 @@
     {{-- <div class="w-[75%] float-right m-4 border-box"> --}}
 
         <div class="mb-4">
-            <div class="flex overflow-auto">
-                    <p class="m-3 p-3 py-1 text-sm border dark:border-white border-black rounded-full">Pop</p>
-                    <p class="m-3 px-3 py-1 text-sm border dark:border-white border-black rounded-full">Rock</p>
-                    <p class="m-3 px-3 py-1 text-sm border dark:border-white border-black rounded-full">Hip Hop</p>
-                    <p class="m-3 px-3 py-1 text-sm border dark:border-white border-black rounded-full">Opera</p>
+            <div class="flex overflow-auto scrollbar-hide">
+                @foreach($genres as $genre)
+                <p class="m-2 px-3 py-0.5 text-sm border dark:border-white border-black rounded-full flex justify-center items-center whitespace-nowrap">
+                {{ $genre->name }}
+                </p>
+                @endforeach
             </div>
         </div>
 
@@ -18,8 +19,11 @@
             <div class="w-[40px] h-[40px] rounded-full overflow-hidden">
                 <img class="rounded-full w-[40px] h-auto object-scale-down" src="https://images.unsplash.com/photo-1756838197413-07f174def66c?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="profile">
                 </div>
-        <h1 class="font-bold text-2xl mt-[1%] ml-2 mb-1">Welcome Back Name</h1>
+
+        @auth
+        <h1 class="font-bold text-2xl mt-[1%] ml-2 mb-1">Welcome Back {{ auth()->user()->name }}</h1>
         </div>
+        @endauth
 
         <div class="mb-4">
             <h1 class="my-5 font-bold text-2xl">

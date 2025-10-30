@@ -28,15 +28,29 @@
 
     {{-- right side --}}
 <div class="flex justify-center items-center">
+    
+    @role('listener')
     <a href="#">
-    <x-special-button/>
+        <x-special-button>
+            Listen Now
+        </x-special-button>
     </a>
+    @endrole
+
+    @role('artist')
+    <a href="#">
+        <x-primary-button>
+            Add new song
+        </x-primary-button>
+    </a>
+    @endrole
+
 
     <a href="#">
     <x-setting-icon/>
     </a>
 
-    <a href="{{ route('profile.edit') }}">
+    <a href="{{ route('user.profile') }}">
         <div class="w-[35px] h-[35px] rounded-full overflow-hidden">
                 <img class="rounded-full w-[35px] h-auto object-scale-down" src="https://images.unsplash.com/photo-1756838197413-07f174def66c?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="profile">
                 </div>
