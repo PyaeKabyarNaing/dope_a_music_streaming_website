@@ -16,12 +16,15 @@ return new class extends Migration
             $table->string('name');
             $table->string('artist_name');
             $table->string('ft_artist_name')->nullable();
-            $table->date('release_date')->nullable();
-            $table->time('duration')->nullable();
-            $table->timestamps();
+            $table->string('cover_image')->nullable();
+            $table->string('audio_file');
+            $table->foreignId('genre_id')->nullable()
+            ->constrained('genres')
+            ->onDelete('cascade');
             $table->foreignId('album_id')->nullable()
             ->constrained('albums')
             ->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

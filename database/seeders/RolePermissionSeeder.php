@@ -38,5 +38,9 @@ class RolePermissionSeeder extends Seeder
 
         $user = User::find(1);
         $user->assignRole($role_admin);
+        $user = User::find(2);
+        $user->assignRole($role_listener);
+        $user = User::find(3);
+        $user->assignRole($role_artist);
     }
 }

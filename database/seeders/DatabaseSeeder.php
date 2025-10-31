@@ -14,10 +14,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $list = ['Pop', 'Rock', 'Classical', 'Opera', 'Country', 'Jazz', 'Blues', 'Reggae', 'Hip Hop', 'R&B', 'Electronic', 'Folk', 'Metal', 'Punk', 'Disco', 'Funk', 'Gospel', 'Ska', 'Soul', 'Techno'];
+        $list = ['Pop', 'Rock', 'Classical', 'Opera', 'Country', 'Jazz', 'Blues', 'EDM', 'Hip Hop', 'R&B', 'DJ', 'Folk', 'Metal', 'Punk', 'Disco', 'Funk', 'Dance'];
         foreach($list as $name) {
             Genre::create(['name' => $name]);
         }
+
+        User::factory()->create([
+            'name' => 'Test Admin',
+            'email' => 'tadmin@example.com',
+        ]);
+        User::factory()->create([
+            'name' => 'Alice',
+            'email' => 'alice@example.com',
+        ]);
+        User::factory()->create([
+            'name' => 'Test Artist',
+            'email' => 'tartist@example.com',
+        ]);
 
         $this->call(RolePermissionSeeder::class);
 

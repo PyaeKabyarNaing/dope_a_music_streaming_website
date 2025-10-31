@@ -27,6 +27,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// artist
+Route::middleware(['auth', 'role:artist'])->group(function () {
+    Route::get('/songs/upload', [SongController::class, 'create'])->name('song.create');
+    Route::post('/songs', [SongController::class, 'store'])->name('song.store');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'view'])->name('user.profile');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
