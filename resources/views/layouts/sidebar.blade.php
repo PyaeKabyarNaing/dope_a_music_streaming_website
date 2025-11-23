@@ -1,33 +1,51 @@
 <!-- resources/views/layouts/sidebar.blade.php -->
 <!-- whole sidebar -->
-<div class="fixed dark:bg-black bg-white inset-y-0 left-0 w-[20%] h-full pr-2 flex-col gap-2 hidden sm:block transform transition-transform duration-300 ease-in-out z-10 pl-7 border-r-4 border-gray-500">
+<div class="fixed dark:bg-black bg-white inset-y-0 left-0 w-[20%] h-full pr-2 flex-col hidden lg:block transform transition-transform duration-300 ease-in-out z-10 pl-7 border-r-4 border-gray-500">
 
 {{-- <x-application-logo/> --}}
 
     <div class="h-[10%]"></div>
 
-     <div class="h-[20%] rounded flex flex-col justify-around gap-2">
+     <div class="h-[20%] flex flex-col">
 
     <!-- Sidebar Links -->
-    <nav class="flex items-center gap-3 cursor-pointer">
-        <x-home-icon/>
-        <a href="{{ route('home') }}">Home</a>
+    <nav class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
+    <div>
+        <x-home-icon class="r-0"/>
+    </div>
+    <div>
+        <a href="{{ route('home') }}" class="text-sm font-medium l-0">Home</a>
+    </div>
     </nav>
 
-    <nav class="flex items-center gap-3 cursor-pointer">
-        <x-home-icon/>
-        <a href="{{ route('playlist.edit') }}">Playlists</a>
+    <nav class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
+        <div>
+            <x-playlist-icon class="r-0"/>
+        </div>
+        <div>
+            <a href="{{ route('playlist.edit') }}" class="text-sm font-medium l-0">Playlists</a>
+        </div>
     </nav>
 
-    <nav class="flex items-center gap-3 cursor-pointer">
-        <x-home-icon/>
-        <a href="{{ route('history.view') }}">History</a>
+    <nav class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
+        <div>
+            <x-history-icon class="r-0"/>
+        </div>
+        <div>
+            <a href="{{ route('history.view') }}" class="text-sm font-medium l-0">History</a>
+        </div>
     </nav>
 
-<form method="POST" action="{{ route('logout') }}" class="flex items-center gap-3 cursor-pointer text-red-500">
+<form method="POST" action="{{ route('logout') }}" class="hover:bg-red-300">
     @csrf
-    <x-home-icon/>
-    <button type="submit">Logout</button>
+    <button type="submit" class="flex items-center py-2 gap-3 cursor-pointer text-red-500">       
+        <div>
+            <x-logout-icon class="r-0"/>
+        </div>
+        <div>
+            <span class="text-base font-bold l-0">Logout</span>
+        </div>
+    </button>
 </form>
     </div>
 

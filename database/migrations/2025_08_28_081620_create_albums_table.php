@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->date('release_year')->nullable();
+            $table->foreignId('artist_id')->nullable()
+            ->constrained('users')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

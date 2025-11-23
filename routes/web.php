@@ -29,8 +29,8 @@ Route::get('/dashboard', function () {
 
 // artist
 Route::middleware(['auth', 'role:artist'])->group(function () {
-    Route::get('/songs/upload', [SongController::class, 'create'])->name('song.create');
-    Route::post('/songs', [SongController::class, 'store'])->name('song.store');
+    Route::get('/song/upload', [SongController::class, 'create'])->name('song.create');
+    Route::post('/song', [SongController::class, 'store'])->name('song.store');
 });
 
 Route::middleware('auth')->group(function () {
@@ -47,8 +47,8 @@ Route::middleware('auth')->group(function () {
 // })->name('admin');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admins', [UserController::class, 'index'])->name('admins.index');
-    Route::post('/admins/{user}/roles', [UserController::class, 'updateRoles'])->name('admins.updateRoles');
+    Route::get('/admin', [UserController::class, 'index'])->name('admins.index');
+    Route::post('/admin/{user}/role', [UserController::class, 'updateRoles'])->name('admins.updateRoles');
 });
 
 require __DIR__.'/auth.php';
