@@ -36,15 +36,20 @@
         <div class="flex overflow-auto">
 
             <!-- each album -->
-            <div class="min-w-[160px] cursor-pointer hover:bg-[#ffffff26] dark:bg-gray-800/10 bg-gray-500/10 m-2 mx-2">
-                <div
-                    class="w-[160px] h-[160px] overflow-hidden bg-red-400 flex justify-center items-center font-bold text-xl rounded-xl">
-                    Top 50 Hits
-                </div>
-                <p class="font-bold mt-2 mb-1">Song Name</p>
-                <p class="text-sm">Artist Name</p>
-            </div>
-
+            {{-- <a href="{{ route('album.show', $album) }}"> --}}
+            @foreach ($albums as $album)
+                <a href="{{ route('album.show', $album) }}">
+                    <div
+                        class="min-w-[160px] cursor-pointer hover:bg-[#ffffff26] dark:bg-gray-800/10 bg-gray-500/10 m-2 mx-2">
+                        <div
+                            class="w-[160px] h-[160px] overflow-hidden bg-red-400 flex justify-center items-center font-bold text-xl rounded-xl">
+                            Top 50 Hits
+                        </div>
+                        <p class="font-bold mt-2 mb-1">{{ $album->name }}</p>
+                        <p class="text-sm">{{ $album->user->name ?? 'Unknown Artist' }}</p>
+                    </div>
+                </a>
+            @endforeach
 
             <div class="min-w-[160px] cursor-pointer hover:bg-[#ffffff26] dark:bg-gray-800/10 bg-gray-500/10 m-2 mx-2">
                 <div class="w-[160px] h-[160px] overflow-hidden">

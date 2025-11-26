@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SongController;
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +11,13 @@ use Illuminate\Support\Facades\Route;
 // })->name('home');
 
 Route::get('/', [SongController::class, 'index'])->name('home');
+
+Route::get('/album', [AlbumController::class, 'index'])->name('album.index');
+// Route::get('/album/create', [AlbumController::class, 'create'])->name('album.create');
+
+// Route::get('/album/create', function () {
+//     return view('albums.create');
+// })->name('album.create');
 
 Route::get('/detail', function () {
     return view('songs.detail');
@@ -31,7 +39,12 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'role:artist'])->group(function () {
     Route::get('/song/upload', [SongController::class, 'create'])->name('song.create');
     Route::post('/song', [SongController::class, 'store'])->name('song.store');
+    
+    Route::get('/album/upload', [AlbumController::class, 'create'])->name('album.create');
+    Route::post('/album', [AlbumController::class, 'store'])->name('album.store');
 });
+
+Route::get('/album/{album}', [AlbumController::class, 'show'])->name('album.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'view'])->name('user.profile');

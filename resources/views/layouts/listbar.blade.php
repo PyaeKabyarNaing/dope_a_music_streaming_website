@@ -1,60 +1,45 @@
 <!-- whole listbar -->
-<div class="fixed dark:bg-black bg-white inset-y-0 right-0 w-[30%] h-full pr-2 flex-col gap-2 hidden sm:block transform transition-transform duration-300 ease-in-out z-10 pl-7 border-l-4 border-gray-500">
+<div
+    class="fixed dark:bg-black bg-white inset-y-0 right-0 w-[30%] h-full pr-2 flex-col gap-2 hidden sm:block transform transition-transform duration-300 ease-in-out z-10 pl-1 border-l-4 border-gray-500">
 
     <div class="h-[10%]"></div>
 
-     <div class="h-[15%] rounded flex flex-col justify-around gap-2">
+    <!-- Loop through songs -->
+    @foreach ($songs as $index => $song)
+        <div class="flex items-center gap-3 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded cursor-pointer song-item"
+            data-index="{{ $index }}">
 
-    <!-- Sidebar Links -->
-    <nav class="flex items-center gap-3 cursor-pointer">
-        <x-home-icon/>
-        <a href="{{ route('home') }}">Home</a>
-    </nav>
+            <!-- Song Cover -->
+            @if ($song->cover_image)
+                <img src="{{ asset('storage/' . $song->cover_image) }}" alt="{{ $song->name }}"
+                    class="w-10 h-10 object-cover rounded-md" />
+            @else
+                <img src="{{ asset('storage/' . $album->cover_image) }}" alt="{{ $song->name }}"
+                    class="w-10 h-10 object-cover rounded-md" />
+            @endif
 
-    <nav class="flex items-center gap-3 cursor-pointer">
-        <x-home-icon/>
-        <a href="{{ route('profile.edit') }}">Profile</a>
-    </nav>
+            <!-- Song Info -->
+            <div class="flex flex-col">
+                <!-- Song Name -->
+                <span class="font-semibold text-sm text-gray-900 dark:text-white">{{ $song->name }}</span>
 
-    <nav class="flex items-center gap-3 cursor-pointer">
-        <x-home-icon/>
-        <a href="{{ route('logout') }}">Logout</a>
-    </nav>
-    </div>
+                <!-- Artist Name -->
+                <span class="text-sm text-gray-500 dark:text-gray-400">{{ $song->artist_name }}</span>
+            </div>
 
-    <div class="h-[65%] rounded mt-3">
-        <h1 class="text-lg"><b>Subscriptions</b></h1>
-        <div class="overflow-auto">
-        <div class="pt-4 flex items-center justify-between">
-            <nav class="flex items-center gap-3">
-                <div class="w-[30px] h-[30px] rounded-full overflow-hidden">
-                <img class="rounded-full w-[30px] h-auto" src="https://images.unsplash.com/photo-1756838197413-07f174def66c?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="profile">
-                </div>
-                <a href="{{ route('logout') }}" class="text-sm">Artist Name</a>
-            </nav>
         </div>
-        <div class="pt-4 flex items-center justify-between">
-            <nav class="flex items-center gap-3">
-                <div class="w-[30px] h-[30px] rounded-full overflow-hidden">
-                <img class="rounded-full w-[30px] h-auto" src="https://images.unsplash.com/photo-1756838197413-07f174def66c?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="profile">
-                </div>
-                <a href="{{ route('logout') }}" class="text-sm">Artist Name</a>
-            </nav>
-        </div>
-        <div class="pt-4 flex items-center justify-between">
-            <a href="{{ route('logout') }}" class="flex items-center gap-3">
-                <div class="w-[30px] h-[30px] rounded-full overflow-hidden">
-                <img class="rounded-full w-[30px] h-auto object-scale-down" src="https://images.unsplash.com/photo-1756838197413-07f174def66c?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="profile">
-                </div>
-                <span class="text-sm">Artist Name</span>
-            </a>
-        </div>
-        </div>
-
-        <div class="mr-4 mt-10 pt-4 bg-[#242424] rounded flex flex-col items-start justify-start gap-1 box-content">
-            <h1>Create your first playlist</h1>
-            <p>It's easy we'll help you</p>
-            <button class="px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4 mb-3">Create Playlist</button>
-        </div>
-    </div>
+    @endforeach
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const songItems = document.querySelectorAll(".song-item");
+
+        songItems.forEach(item => {
+            item.addEventListener("click", () => {
+                const index = parseInt(item.dataset.index);
+                player.playSongAt(index);
+            });
+        });
+    });
+</script>

@@ -22,11 +22,11 @@ class SongController extends Controller
 
     // create song page
     public function create() {
-        $data = Genre::all();
-        $albums = Album::where('artist_id', auth()->id())->get();
+        $genres = Genre::all();
+        $albums = Album::where('user_id', auth()->id())->get();
 
         return view('songs.create', [
-            'genres' => $data,
+            'genres' => $genres,
             'albums' => $albums,
         ]);
     }
@@ -62,9 +62,9 @@ class SongController extends Controller
             "name" => "required",
             "artist_name" => "required",
             "ft_artist_name" => "nullable",
-            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'audio_file' => 'required|mimes:mp3,wav,ogg|max:10240',
-            "genre_id" => "nullable",
+            "cover_image" => "nullable|image|mimes:jpeg,png,jpg|max:2048",
+            "audio_file" => "required|mimes:mp3,wav,ogg|max:10240",
+            "genre_id" => "required",
             "album_id" => "nullable",
         ]);
 
@@ -102,6 +102,7 @@ class SongController extends Controller
             'album_id' => $request->album_id,
             'cover_image' => isset($coverName) ? ('images/' . $coverName) : null,
             'audio_file' => 'songs/' . $audioName,
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('song.create')->with('success', 'Song uploaded successfully!');

@@ -14,5 +14,21 @@ class Song extends Model
         'album_id',
         'cover_image',
         'audio_file',
+        'user_id',
     ];
+
+    public function album()
+    {
+        return $this->belongsTo(Album::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

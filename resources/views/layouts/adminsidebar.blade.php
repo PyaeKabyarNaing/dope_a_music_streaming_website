@@ -9,18 +9,18 @@
 
         <!-- Sidebar Links -->
         <nav class="flex items-center gap-3 cursor-pointer">
-            <x-home-icon />
+            <x-icons.home-icon />
             <a href="{{ route('admins.index') }}">Home</a>
         </nav>
 
         <nav class="flex items-center gap-3 cursor-pointer">
-            <x-home-icon />
+            <x-icons.home-icon />
             <a href="{{ route('profile.edit') }}">Profile</a>
         </nav>
 
         <form method="POST" action="{{ route('logout') }}" class="flex items-center gap-3 cursor-pointer text-red-500">
             @csrf
-            <x-home-icon />
+            <x-icons.logout-icon />
             <button type="submit">Logout</button>
         </form>
     </div>

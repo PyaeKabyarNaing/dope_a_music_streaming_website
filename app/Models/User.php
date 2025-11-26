@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, Billable;
 
     // Users I follow
     public function following()
@@ -26,6 +27,12 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id')
                     ->withTimestamps();
     }
+
+    public function albums() 
+    {
+        return $this->hasMany(Album::class);
+    }
+
 
     /**
      * The attributes that are mass assignable.

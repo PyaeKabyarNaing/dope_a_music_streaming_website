@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment_methods', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('description')->nullable();
-            $table->boolean('status')->default(true);
-            $table->timestamps();
+        Schema::table('subscription_items', function (Blueprint $table) {
+            $table->string('meter_event_name')->nullable()->after('quantity');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment_methods');
+        Schema::table('subscription_items', function (Blueprint $table) {
+            $table->dropColumn('meter_event_name');
+        });
     }
 };

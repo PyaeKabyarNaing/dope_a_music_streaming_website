@@ -32,12 +32,23 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            "cover_image" => "nullable|image|mimes:jpeg,png,jpg|max:2048",
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        if ($request->hasFile('cover_image')) {
+        $cover = $request->file('cover_image');
+
+        $coverName = uniqid() . '.' . $cover->getClientOriginalExtension();
+
+        // save to storage/app/public/covers
+        $cover->storeAs('images', $coverName, 'public');
+    }
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'cover_image' => isset($coverName) ? ('images/' . $coverName) : null,
             'password' => Hash::make($request->password),
         ]);
 
