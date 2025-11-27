@@ -1,4 +1,24 @@
 <x-app-layout>
+
+    @if (session()->has('success'))
+        <div id="flash-message" class="w-full bg-green-500 text-white p-4 mb-4 rounded-md">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <script>
+        const flash = document.getElementById('flash-message');
+
+        if (flash) {
+            setTimeout(() => {
+                flash.style.transition = "opacity 0.5s";
+                flash.style.opacity = "0";
+
+                setTimeout(() => flash.remove(), 500);
+            }, 3000);
+        }
+    </script>
+
     <div class="max-w-2xl mx-auto p-6 rounded-2xl shadow-md mt-10">
         <header class="text-center text-2xl font-bold">
             Upload Song
@@ -27,8 +47,7 @@
             <div>
                 <x-input-label for="ft_artist_name" :value="__('Featuring Artist Name')" />
                 <x-text-input id="ft_artist_name" name="ft_artist_name" type="text" class="mt-1 block w-full"
-                    value="{{ old('ft_artist_name') }}" required />
-                <x-input-error :messages="$errors->get('ft_artist_name')" class="mt-2" />
+                    value="{{ old('ft_artist_name') }}" />
             </div>
 
             <!-- Genre -->

@@ -24,9 +24,7 @@
     <div class="min-h-screen">
 
         <!-- navbar -->
-        <div class="z-30">
-            @include('layouts.nav')
-        </div>
+        @include('layouts.nav')
 
         <!-- sidebar -->
         @include('layouts.sidebar')
@@ -41,16 +39,16 @@
         @endisset
 
         <!-- Page Content -->
-        <main class="lg:ml-[21%] ml-[2%] mb-[10%] mt-[70px] 
+        <main class="lg:ml-[21%] ml-5 mt-[70px] mb-[10%] 
         @if (Route::is('album.show')) mr-[30%] @endif">
             {{ $slot }}
         </main>
 
         <!-- audio player -->
-        @include('layouts.audiobar')
+        {{-- @include('layouts.audiobar') --}}
     </div>
 
-    {{-- <script src="{{ asset('js/player.js') }}"></script> --}}
+    <script src="{{ asset('js/player.js') }}"></script>
 </body>
 
 </html>

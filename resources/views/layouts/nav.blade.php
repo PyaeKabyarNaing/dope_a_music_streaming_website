@@ -4,7 +4,7 @@
     <div class="flex justify-between items-center pt-2 pl-7 pb-1 pr-7">
         {{-- logo --}}
         <div class="flex justify-around items-center flex-none">
-            <div>
+            <div class="block lg:hidden">
                 <x-icons.menu-icon />
             </div>
 
@@ -63,16 +63,13 @@
                         <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="profile"
                             class="rounded-full w-[35px] h-auto object-scale-down" alt="profile" />
                     </div>
+                @else
+                    <div
+                        class="w-[35px] h-[35px] bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    </div>
+                @endif
+            </a>
         </div>
-    @else
-        <div
-            class="w-[35px] h-[35px] bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
-            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-        </div>
-        @endif
-        </a>
-    </div>
-
-    {{-- huamburger --}}
     </div>
 </nav>

@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $list = ['Pop', 'Rock', 'Classical', 'Opera', 'Country', 'Jazz', 'Blues', 'EDM', 'Hip Hop', 'R&B', 'DJ', 'Folk', 'Metal', 'Punk', 'Disco', 'Funk', 'Dance'];
+        $list = ['Pop', 'Rock', 'Classical', 'Opera', 'Country', 'Jazz', 'Blues', 'EDM', 'Hip Hop', 'R&B', 'DJ', 'Metal', 'Punk'];
         foreach($list as $name) {
             Genre::create(['name' => $name]);
         }
@@ -33,15 +33,31 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test Artist',
             'email' => 'tartist@example.com',
         ]);
+        User::factory()->create([
+            'name' => 'Queen',
+            'email' => 'queen@example.com',
+            'image' => 'images/69253a2548f0e.jpg',
+        ]);
+        User::factory()->create([
+            'name' => 'Sia',
+            'email' => 'sia@example.com',
+            'image' => 'images/69281e28b7a43.jpg',
+        ]);
+        User::factory()->create([
+            'name' => 'Billie Eilish',
+            'email' => 'billie@example.com',
+            'image' => 'images/69281d71221c1.jpg',
+        ]);
 
         $this->call(RolePermissionSeeder::class);
-
-        // User::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // User::factory(10)->create();
+        $this->call(UserSeeder::class);
 
         Album::create([
             'name' => 'Album Bohemian',
@@ -71,24 +87,25 @@ class DatabaseSeeder extends Seeder
             'user_id' => 3,
         ]);
         Song::create([
-            'name' => 'Bohemian Rhapsody 2',
-            'artist_name' => 'Queen',
-            'ft_artist_name' => 'noone',
-            'cover_image' => 'images/69253a2548f0e.jpg',
-            'audio_file' => 'songs/69253a254aba0.mp3',
+            'name' => 'Snowman',
+            'artist_name' => 'Sia',
+            'cover_image' => 'images/69281e28b7a43.jpg',
+            'audio_file' => 'songs/69281e28b9412.mp3',
             'album_id' => 1,
-            'genre_id' => Genre::where('name', 'Rock')->first()->id,
+            'genre_id' => Genre::where('name', 'Pop')->first()->id,
             'user_id' => 3,
         ]);
+
         Song::create([
-            'name' => 'Bohemian Rhapsody 3',
-            'artist_name' => 'Queen',
-            'ft_artist_name' => 'noone',
-            'cover_image' => 'images/69253a2548f0e.jpg',
-            'audio_file' => 'songs/69253a254aba0.mp3',
+            'name' => 'Bad Guy',
+            'artist_name' => 'Billie Eilish',
+            'cover_image' => 'images/69281d71221c1.jpg',
+            'audio_file' => 'songs/69281d7123dec.mp3',
             'album_id' => 1,
-            'genre_id' => Genre::where('name', 'Rock')->first()->id,
+            'genre_id' => Genre::where('name', 'Pop')->first()->id,
             'user_id' => 3,
         ]);
+
+        $this->call(SongSeeder::class);
     }
 }

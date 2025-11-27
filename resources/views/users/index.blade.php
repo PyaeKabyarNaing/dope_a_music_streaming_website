@@ -32,17 +32,17 @@
     </div>
 
     <div class="flex">
-        {{-- @if (auth()->user()->name)
+        @if (auth()->user()->name)
             <div class="w-[40px] h-[40px] rounded-full overflow-hidden">
                 <img class="rounded-full w-[40px] h-auto object-scale-down"
                     src="{{ asset('storage/' . auth()->user()->image) }}" alt="profile">
             </div>
-        @else --}}
-        <div
-            class="w-[45px] h-[45px] bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
-            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-        </div>
-        {{-- @endif --}}
+        @else
+            <div
+                class="w-[45px] h-[45px] bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+            </div>
+        @endif
 
         @auth
             <h1 class="font-bold text-2xl mt-[1%] ml-2 mb-1">Welcome Back {{ auth()->user()->name }}</h1>

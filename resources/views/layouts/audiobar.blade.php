@@ -15,34 +15,23 @@
         <!-- Control Buttons -->
         <div class="flex items-center gap-4">
 
-            <button class="text-gray-600 dark:text-gray-400 hover:text-purple-600 transition" id="shuffle-btn">
-                <x-icons.play-icon class="w-5 h-5" />
-            </button>
-
             <!-- Previous -->
             <button class="text-gray-600 dark:text-gray-400 hover:text-purple-600 transition" id="prev-btn">
-                <x-icons.play-icon class="w-5 h-5" />
+                <x-icons.previous-icon class="w-5 h-5" />
             </button>
 
             <!-- Play/Pause -->
             <button class="bg-purple-600 text-white p-2 rounded-full hover:bg-purple-700 transition"
                 id="play-pause-btn">
                 <x-icons.play-icon class="w-5 h-5" id="play-icon" />
-                <x-icons.pause-icon class="w-5 h-5 hidden" id="pause-icon" />
+                <x-icons.pause-icon class="w-5 h-5" id="pause-icon" />
             </button>
 
             <!-- Next -->
             <button class="text-gray-600 dark:text-gray-400 hover:text-purple-600 transition" id="next-btn">
-                <x-icons.pause-icon class="w-5 h-5" />
-            </button>
-
-            <!-- Repeat -->
-            <button class="text-gray-600 dark:text-gray-400 hover:text-purple-600 transition" id="repeat-btn">
-                <x-icons.reload-icon class="w-5 h-5" />
-            </button>
+                <x-icons.next-icon class="w-5 h-5" />
         </div>
         <audio id="audio-player"></audio>
-
 
         <!-- Progress Bar -->
         <div class="flex items-center gap-3 w-full max-w-md">
@@ -60,15 +49,6 @@
 
     <!-- Right: Volume & Additional Controls -->
     <div class="hidden lg:flex items-center gap-4 flex-1 justify-end">
-        <!-- Lyrics -->
-        <button class="text-gray-600 dark:text-gray-400 hover:text-purple-600 transition" id="lyrics-btn">
-            <x-icons.pause-icon class="w-5 h-5" />
-        </button>
-
-        <!-- Queue -->
-        <button class="text-gray-600 dark:text-gray-400 hover:text-purple-600 transition" id="queue-btn">
-            <x-icons.pause-icon class="w-5 h-5" />
-        </button>
 
         <!-- Volume -->
         <div class="flex items-center gap-2">
@@ -252,7 +232,7 @@
         volumeContainer.addEventListener('click', setVolume);
 
         // Initialize button states
-        initializeButtonStates();
+        // initializeButtonStates();
 
         // Initialize volume
         if (window.player && window.player.audio) {
