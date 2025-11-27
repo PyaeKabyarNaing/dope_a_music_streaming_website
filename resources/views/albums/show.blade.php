@@ -1,7 +1,7 @@
 <x-app-layout>
     <!-- listbar -->
     @include('layouts.listbar')
-    @include('layouts.audiobar')
+    {{-- @include('layouts.audiobar') --}}
 
     <!-- Album Name Header -->
     <h1 class="text-2xl font-bold mb-6">

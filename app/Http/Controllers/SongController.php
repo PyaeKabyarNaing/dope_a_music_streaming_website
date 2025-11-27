@@ -18,6 +18,7 @@ class SongController extends Controller
         $albums = Album::all();
         $genres = Genre::all();
         return view('users.index', compact('users', 'genres', 'albums'));
+        // return view('layouts.nav', compact('users', 'genres', 'albums'));
     }
 
     // create song page

@@ -1,9 +1,23 @@
 <x-app-layout>
-    {{-- <x-slot name="header">
-        
-    </x-slot> --}}
 
-    {{-- <div class="w-[75%] float-right m-4 border-box"> --}}
+    @if (session()->has('success'))
+        <div id="flash-message" class="w-full bg-green-500 text-white p-4 mb-4 rounded-md">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <script>
+        const flash = document.getElementById('flash-message');
+
+        if (flash) {
+            setTimeout(() => {
+                flash.style.transition = "opacity 0.5s";
+                flash.style.opacity = "0";
+
+                setTimeout(() => flash.remove(), 500);
+            }, 3000);
+        }
+    </script>
 
     <!-- Genres -->
     <div class="mb-4">
@@ -18,11 +32,17 @@
     </div>
 
     <div class="flex">
-        <div class="w-[40px] h-[40px] rounded-full overflow-hidden">
-            <img class="rounded-full w-[40px] h-auto object-scale-down"
-                src="https://images.unsplash.com/photo-1756838197413-07f174def66c?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="profile">
+        {{-- @if (auth()->user()->name)
+            <div class="w-[40px] h-[40px] rounded-full overflow-hidden">
+                <img class="rounded-full w-[40px] h-auto object-scale-down"
+                    src="{{ asset('storage/' . auth()->user()->image) }}" alt="profile">
+            </div>
+        @else --}}
+        <div
+            class="w-[45px] h-[45px] bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
         </div>
+        {{-- @endif --}}
 
         @auth
             <h1 class="font-bold text-2xl mt-[1%] ml-2 mb-1">Welcome Back {{ auth()->user()->name }}</h1>

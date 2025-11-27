@@ -3,14 +3,13 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     return view('users.index');
 // })->name('home');
-
-Route::get('/', [SongController::class, 'index'])->name('home');
 
 Route::get('/album', [AlbumController::class, 'index'])->name('album.index');
 // Route::get('/album/create', [AlbumController::class, 'create'])->name('album.create');
@@ -35,6 +34,18 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// billing
+Route::middleware('auth')->get('/billing/checkout', [BillingController::class, 'checkout']);
+
+Route::get('/billing/success', function () {
+    return redirect()->route('home')->with('success', 'You are now Premium User');
+})->name('billing.success');
+
+Route::get('/billing/cancel', function () {
+    return redirect()->route('home')->with('error', 'Payment canceled.');
+})->name('billing.cancel');
+
+
 // artist
 Route::middleware(['auth', 'role:artist'])->group(function () {
     Route::get('/song/upload', [SongController::class, 'create'])->name('song.create');
@@ -47,6 +58,7 @@ Route::middleware(['auth', 'role:artist'])->group(function () {
 Route::get('/album/{album}', [AlbumController::class, 'show'])->name('album.show');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/', [SongController::class, 'index'])->name('home');
     Route::get('/profile', [ProfileController::class, 'view'])->name('user.profile');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');

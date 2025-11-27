@@ -31,11 +31,6 @@
         <!-- sidebar -->
         @include('layouts.sidebar')
 
-        {{-- @role('artist')
-            <!-- listbar -->
-            @include('layouts.listbar')
-        @endrole --}}
-
         <!-- Page Heading -->
         @isset($header)
             <header class="shadow ml-[21%] mt-[8%]">
@@ -52,10 +47,10 @@
         </main>
 
         <!-- audio player -->
-        {{-- @include('layouts.audiobar') --}}
+        @include('layouts.audiobar')
     </div>
 
-    <script src="{{ asset('js/player.js') }}"></script>
+    {{-- <script src="{{ asset('js/player.js') }}"></script> --}}
 </body>
 
 </html>

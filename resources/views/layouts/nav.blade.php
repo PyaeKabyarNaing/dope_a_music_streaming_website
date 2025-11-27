@@ -39,9 +39,7 @@
 
             @role('listener')
                 <a href="#">
-                    <x-special-button>
-                        Listen Now
-                    </x-special-button>
+                    <x-special-button />
                 </a>
             @endrole
 
@@ -59,14 +57,22 @@
             </a>
 
             <a href="{{ route('user.profile') }}">
-                <div class="w-[35px] h-[35px] rounded-full overflow-hidden">
-                    <img class="rounded-full w-[35px] h-auto object-scale-down"
-                        src="https://images.unsplash.com/photo-1756838197413-07f174def66c?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="profile">
-                </div>
-            </a>
-        </div>
 
-        {{-- huamburger --}}
+                @if (auth()->user()->image)
+                    <div class="w-[35px] h-[35px] rounded-full overflow-hidden">
+                        <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="profile"
+                            class="rounded-full w-[35px] h-auto object-scale-down" alt="profile" />
+                    </div>
+        </div>
+    @else
+        <div
+            class="w-[35px] h-[35px] bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+        </div>
+        @endif
+        </a>
+    </div>
+
+    {{-- huamburger --}}
     </div>
 </nav>
