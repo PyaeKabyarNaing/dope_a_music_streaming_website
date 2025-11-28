@@ -73,7 +73,7 @@
             @csrf
             <textarea name="content" rows="2" class="w-full p-2 border rounded-md focus:ring focus:ring-purple-300 text-black"
                 placeholder="Add a comment..."></textarea>
-            {{-- <input type="hidden" name="song_id" value="{{ $song->id }}"> --}}
+            <input type="hidden" name="song_id" value="{{ $song->id }}">
 
             <x-secondary-button>Comment</x-secondary-button>
         </form>

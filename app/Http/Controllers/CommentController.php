@@ -13,6 +13,7 @@ class CommentController extends Controller
     {
         $song = Song::findOrFail($id);
         return view('albums.show', compact('song'));
+        // return view('songs.detail', compact('song'));
     }
 
     public function store(Request $request) {
