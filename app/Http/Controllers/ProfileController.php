@@ -8,12 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
+use App\Models\Song;
 
 class ProfileController extends Controller
 {
-    public function view(): View
+    public function view($id)
     {
-        return view('users.profile');
+        $artist = User::findOrFail($id);
+        $songs = Song::where('user_id', $id)->get();
+        return view('users.profile', compact('artist', 'songs'));
     }
 
     /**

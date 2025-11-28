@@ -6,5 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    //
+    protected $fillable = [
+        'content', 
+        'user_id', 
+        'song_id'
+    ];
+
+    public function song() {
+        return $this->belongsTo('App\Models\Song');
+    }
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
 }

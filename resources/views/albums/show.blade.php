@@ -1,6 +1,6 @@
 <x-app-layout>
+    {{-- @include('layouts.audiobar') --}}
     <!-- listbar -->
-    @include('layouts.audiobar')
     @include('layouts.listbar')
 
     <!-- Album Name Header -->
@@ -50,7 +50,7 @@
 
             <!-- Share -->
             <button class="hover:text-blue-500 transition">
-                <x-icons.heart-icon />
+                <x-icons.share-icon />
             </button>
 
             <!-- Download -->
@@ -67,12 +67,13 @@
     <!-- Comment Section -->
     <div class="h-64 overflow-y-auto pr-2">
 
+        {{-- @foreach ($album->songs as $song) --}}
         <!-- Add Comment -->
-        {{-- <form action="{{ route('song.comment', $song->id) }}" method="POST" class="mb-4"> --}}
-        <form action="#" method="POST" class="mb-4">
+        <form action="{{ route('comment.store') }}" method="POST" class="mb-4">
             @csrf
-            <textarea name="comment" rows="2" class="w-full p-2 border rounded-md focus:ring focus:ring-blue-300"
+            <textarea name="content" rows="2" class="w-full p-2 border rounded-md focus:ring focus:ring-purple-300 text-black"
                 placeholder="Add a comment..."></textarea>
+            {{-- <input type="hidden" name="song_id" value="{{ $song->id }}"> --}}
 
             <x-secondary-button>Comment</x-secondary-button>
         </form>

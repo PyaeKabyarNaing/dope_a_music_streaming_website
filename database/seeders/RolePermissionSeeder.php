@@ -46,5 +46,17 @@ class RolePermissionSeeder extends Seeder
         $user->assignRole($role_artist);
         $user = User::find(5);
         $user->assignRole($role_artist);
+        $user = User::find(6);
+        $user->assignRole($role_artist);
+        $user = User::find(7);
+        $user->assignRole($role_artist);
+        $user = User::find(8);
+        $user->assignRole($role_artist);
+        $user = User::find(9);
+        $user->assignRole($role_artist);
+        $user = User::find(10);
+        $user->assignRole($role_artist);
+        $user = User::find(11);
+        $user->assignRole($role_artist);
     }
 }

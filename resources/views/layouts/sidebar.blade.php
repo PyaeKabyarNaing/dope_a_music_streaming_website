@@ -1,60 +1,66 @@
 <!-- resources/views/layouts/sidebar.blade.php -->
 <!-- whole sidebar -->
-<div
-    class="fixed dark:bg-black bg-white inset-y-0 left-0 w-[20%] h-full pr-2 flex-col hidden lg:block transform transition-transform duration-300 ease-in-out z-10 pl-7 border-r-4 border-gray-500">
+<div id="sidebar"
+    class="fixed dark:bg-black bg-white inset-y-0 left-0 w-[243px] sm:w-[243px] md:w-[243px] 
+           lg:w-[243px] h-full pr-2 flex flex-col
+           -translate-x-full lg:translate-x-0
+           transform transition-transform duration-300 ease-in-out z-10 pl-7 border-r-4 border-gray-500">
 
-    {{-- <x-application-logo/> --}}
 
     <div class="h-[10%]"></div>
 
     <div class="h-[20%] flex flex-col">
 
         <!-- Sidebar Links -->
-        <nav class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
+        <a href="{{ route('home') }}" class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
             <div>
                 <x-icons.home-icon class="r-0" />
             </div>
             <div>
-                <a href="{{ route('home') }}" class="text-sm font-medium l-0">Home</a>
+                <span class="text-sm font-medium l-0">Home</span>
             </div>
-        </nav>
+        </a>
 
-        <nav class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
+        <a href="{{ route('playlist.edit') }}"
+            class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
             <div>
                 <x-icons.playlist-icon class="r-0" />
             </div>
             <div>
-                <a href="{{ route('playlist.edit') }}" class="text-sm font-medium l-0">Playlists</a>
+                <span class="text-sm font-medium l-0">Playlists</span>
             </div>
-        </nav>
+        </a>
 
-        <nav class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
+        <a href="{{ route('history.view') }}"
+            class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
             <div>
                 <x-icons.history-icon class="r-0" />
             </div>
             <div>
-                <a href="{{ route('history.view') }}" class="text-sm font-medium l-0">History</a>
+                <span class="text-sm font-medium l-0">History</span>
             </div>
-        </nav>
+        </a>
 
         @role('artist')
-            <nav class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
+            <a href="{{ route('album.create') }}"
+                class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
                 <div>
                     <x-icons.album-icon class="r-0" />
                 </div>
                 <div>
-                    <a href="{{ route('album.create') }}" class="text-sm font-medium l-0">Create New ALbum</a>
+                    <span class="text-sm font-medium l-0">Create New ALbum</span>
                 </div>
-            </nav>
+            </a>
 
-            <nav class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
+            <a href="{{ route('song.create') }}"
+                class="flex items-center py-2 gap-3 cursor-pointer hover:bg-gray-700 transition">
                 <div>
                     <x-icons.music-icon class="r-0" />
                 </div>
                 <div>
-                    <a href="{{ route('song.create') }}" class="text-sm font-medium l-0">Add New Song</a>
+                    <span class="text-sm font-medium l-0">Add New Song</span>
                 </div>
-            </nav>
+            </a>
         @endrole
 
         <form method="POST" action="{{ route('logout') }}" class="hover:bg-red-300">
@@ -70,3 +76,10 @@
         </form>
     </div>
 </div>
+
+<script>
+    document.getElementById('menu-btn').addEventListener('click', function() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('-translate-x-full');
+    });
+</script>

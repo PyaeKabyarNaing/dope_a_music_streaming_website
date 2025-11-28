@@ -22,7 +22,6 @@ class AlbumController extends Controller
     ]);
     }
 
-
     // Show create album form
     public function create()
     {

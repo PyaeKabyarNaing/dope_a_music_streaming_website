@@ -53,9 +53,9 @@
         <!-- Volume -->
         <div class="flex items-center gap-2">
             <button class="text-gray-600 dark:text-gray-400 hover:text-purple-600 transition" id="volume-btn">
-                <x-icons.speaker-icon class="w-5 h-5" id="volume-high-icon" />
-                <x-icons.speaker-icon class="w-5 h-5 hidden" id="volume-low-icon" />
-                <x-icons.speaker-x-icon class="w-5 h-5 hidden" id="volume-mute-icon" />
+                <x-icons.volumn-high-icon class="w-5 h-5" id="volume-high-icon" />
+                <x-icons.volumn-low-icon id="volume-low-icon" />
+                <x-icons.volumn-mute-icon id="volume-mute-icon" />
             </button>
             <div class="w-20 relative group cursor-pointer" id="volume-container">
                 <div class="w-full h-1 bg-gray-300 dark:bg-gray-600 rounded-full">
@@ -232,7 +232,7 @@
         volumeContainer.addEventListener('click', setVolume);
 
         // Initialize button states
-        // initializeButtonStates();
+        initializeButtonStates();
 
         // Initialize volume
         if (window.player && window.player.audio) {

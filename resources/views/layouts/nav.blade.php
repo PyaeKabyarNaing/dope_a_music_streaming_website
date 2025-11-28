@@ -4,11 +4,9 @@
     <div class="flex justify-between items-center pt-2 pl-7 pb-1 pr-7">
         {{-- logo --}}
         <div class="flex justify-around items-center flex-none">
-            <div class="block lg:hidden">
-                <x-icons.menu-icon />
-            </div>
+            <x-icons.menu-icon />
 
-            <div class="pl-3">
+            <div class="pl-4">
                 <a href="{{ route('home') }}" class="hidden dark:block">
                     <x-dark-logo />
                 </a>
@@ -43,20 +41,11 @@
                 </a>
             @endrole
 
-            @role('artist')
-                <a href="{{ route('song.create') }}">
-                    <x-primary-button>
-                        Add new song
-                    </x-primary-button>
-                </a>
-            @endrole
-
-
-            <a href="#" class="mx-2">
+            {{-- <a href="#" class="mx-2">
                 <x-icons.setting-icon />
-            </a>
+            </a> --}}
 
-            <a href="{{ route('user.profile') }}">
+            <a href="{{ route('user.profile', auth()->user()->id) }}">
 
                 @if (auth()->user()->image)
                     <div class="w-[35px] h-[35px] rounded-full overflow-hidden">

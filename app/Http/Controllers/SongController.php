@@ -12,13 +12,25 @@ use Illuminate\Http\Request;
 
 class SongController extends Controller
 {
+    public function show(Song $song)
+    {
+        // $song = Song::with('user', 'comments.user')->findOrFail($song->id);
+        $song->load('user', 'comments.user');
+
+        return view('songs.detail', [
+        'song' => $song,
+        'user' => $song->user,
+    ]);
+    }
+
     public function index()
     {
         $users = User::all();
+        $songs = Song::orderBy('created_at', 'desc')->get();
         $albums = Album::all();
         $genres = Genre::all();
-        return view('users.index', compact('users', 'genres', 'albums'));
-        // return view('layouts.nav', compact('users', 'genres', 'albums'));
+        $artists = User::role('artist')->get();
+        return view('users.index', compact('users', 'genres', 'songs', 'albums', 'artists'));
     }
 
     // create song page

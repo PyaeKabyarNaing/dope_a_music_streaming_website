@@ -32,11 +32,12 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test Artist',
             'email' => 'tartist@example.com',
+            'image' => 'images/6929178b22723.jpg',
         ]);
         User::factory()->create([
             'name' => 'Queen',
             'email' => 'queen@example.com',
-            'image' => 'images/69253a2548f0e.jpg',
+            'image' => 'images/69291652d9060.jpg',
         ]);
         User::factory()->create([
             'name' => 'Sia',
@@ -47,6 +48,31 @@ class DatabaseSeeder extends Seeder
             'name' => 'Billie Eilish',
             'email' => 'billie@example.com',
             'image' => 'images/69281d71221c1.jpg',
+        ]);
+        User::factory()->create([
+            'name' => 'Eminem',
+            'email' => 'enimem@example.com',
+            'image' => 'images/Eminem.jpg',
+        ]);
+        User::factory()->create([
+            'name' => 'Kendrick Lamar',
+            'email' => 'kendrick@example.com',
+            'image' => 'images/KDot.jpg',
+        ]);
+        User::factory()->create([
+            'name' => 'Ariana Grande',
+            'email' => 'ariana@example.com',
+            'image' => 'images/Ariana.jpg',
+        ]);
+        User::factory()->create([
+            'name' => '50 Cent',
+            'email' => '50@example.com',
+            'image' => 'images/50_Cent.jpeg',
+        ]);
+        User::factory()->create([
+            'name' => 'J Cole',
+            'email' => 'j@example.com',
+            'image' => 'images/J_Cole.jpeg',
         ]);
 
         $this->call(RolePermissionSeeder::class);
@@ -77,10 +103,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Song::create([
-            'name' => 'Bohemian Rhapsody 1',
+            'name' => 'Bohemian Rhapsody',
             'artist_name' => 'Queen',
             'ft_artist_name' => 'noone',
-            'cover_image' => 'images/69253a2548f0e.jpg',
+            'cover_image' => 'images/69291652d9060.jpg',
             'audio_file' => 'songs/69253a254aba0.mp3',
             'album_id' => 1,
             'genre_id' => Genre::where('name', 'Rock')->first()->id,

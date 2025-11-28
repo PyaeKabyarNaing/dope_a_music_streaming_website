@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,14 +57,19 @@ Route::middleware(['auth', 'role:artist'])->group(function () {
 });
 
 Route::get('/album/{album}', [AlbumController::class, 'show'])->name('album.show');
+Route::get('/song/{song}', [SongController::class, 'show'])->name('song.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [SongController::class, 'index'])->name('home');
-    Route::get('/profile', [ProfileController::class, 'view'])->name('user.profile');
+    Route::get('/profile/{id}', [ProfileController::class, 'view'])->name('user.profile');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile/edit', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// comment
+
+Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 
 // admin
 

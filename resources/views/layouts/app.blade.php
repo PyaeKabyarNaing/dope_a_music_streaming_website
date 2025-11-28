@@ -39,13 +39,13 @@
         @endisset
 
         <!-- Page Content -->
-        <main class="lg:ml-[21%] ml-5 mt-[70px] mb-[10%] 
+        <main class="lg:ml-[250px] ml-5 mt-[70px] mb-[10%] 
         @if (Route::is('album.show')) mr-[30%] @endif">
             {{ $slot }}
         </main>
 
         <!-- audio player -->
-        {{-- @include('layouts.audiobar') --}}
+        @include('layouts.audiobar')
     </div>
 
     <script src="{{ asset('js/player.js') }}"></script>
