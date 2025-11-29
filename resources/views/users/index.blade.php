@@ -66,8 +66,8 @@
                         </div> --}}
                         <img class="w-[160px] h-[160px] overflow-hidden bg-red-400 flex justify-center items-center font-bold text-xl rounded-xl object-cover"
                             src="{{ asset('storage/' . $album->cover_image) }}" alt="">
-                        <p class="font-bold mt-2 mb-1">{{ $album->name }}</p>
-                        <p class="text-sm">{{ $album->user->name ?? 'Unknown Artist' }}</p>
+                        <p class="font-bold mt-2 mb-1 truncate">{{ $album->name }}</p>
+                        <p class="text-sm truncate">{{ $album->user->name ?? 'Unknown Artist' }}</p>
                     </div>
                 </a>
             @endforeach
@@ -77,7 +77,7 @@
 
     <div class="mb-4">
         <h1 class="my-5 font-bold text-2xl">
-            Songs of the Week
+            Latest Songs
         </h1>
         <div class="flex overflow-auto">
 
@@ -92,8 +92,8 @@
                         </div> --}}
                         <img class="w-[160px] h-[160px] overflow-hidden bg-red-400 flex justify-center items-center font-bold text-xl rounded-xl object-cover"
                             src="{{ asset('storage/' . $song->cover_image) }}" alt="">
-                        <p class="font-bold mt-2 mb-1">{{ $song->user->name }} - {{ $song->name }}</p>
-                        <p class="text-sm">{{ $song->user->name ?? 'Unknown Artist' }}</p>
+                        <p class="font-bold mt-2 mb-1 ">{{ $song->user->name }} - {{ $song->name }}</p>
+                        <p class="text-sm ">{{ $song->user->name ?? 'Unknown Artist' }}</p>
                     </div>
                 </a>
             @endforeach
@@ -115,7 +115,7 @@
                         <img class="w-full h-full object-cover" src="{{ asset('storage/' . $artist->image) }}"
                             alt="profile">
                     </div>
-                    <div class="font-bold mt-3 mb-1">{{ $artist->name }}</div>
+                    <div class="font-bold mt-3 mb-1 truncate">{{ $artist->name }}</div>
                 </a>
             @endforeach
         </div>

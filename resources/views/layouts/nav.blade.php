@@ -17,28 +17,35 @@
         </div>
 
         {{-- search --}}
-        <div class="flex justify-center items-center grow">
-            <input type="text" placeholder="Search"
+        <form action="{{ route('search') }}" method="GET" class="flex justify-center items-center grow">
+            <input type="text" value="{{ request('search') }}" name="search" placeholder="Search"
                 class="bg-[#ffffff1a] rounded-full w-[300px] h-[40px] ps-4 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500">
 
             <div class="flex mx-2">
-                <button
+                <button type="submit"
                     class="h-10 w-10 flex items-center justify-center rounded-full bg-[#ffffff1a] focus:ring-2 focus:ring-purple-400 hover:text-black">
                     <x-icons.search-icon />
                 </button>
             </div>
+        </form>
 
-            {{-- <div class="w-[200px] h-[50px] border border-white">
-    </div> --}}
-        </div>
+        @isset($searchSongs)
+            <ul>
+                @forelse($searchSongs as $searchSong)
+                    <li>{{ $searchSong->name }}</li>
+                @empty
+                    <li>No songs found</li>
+                @endforelse
+            </ul>
+        @endisset
 
         {{-- right side --}}
         <div class="flex justify-center items-center flex-none">
 
             @role('listener')
-                <a href="#">
-                    <x-special-button />
-                </a>
+                {{-- @if (!auth()->user()->subscribed('default')) --}}
+                <x-special-button />
+                {{-- @endif --}}
             @endrole
 
             {{-- <a href="#" class="mx-2">

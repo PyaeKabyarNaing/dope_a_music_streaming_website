@@ -33,6 +33,24 @@ class SongController extends Controller
         return view('users.index', compact('users', 'genres', 'songs', 'albums', 'artists'));
     }
 
+    public function search(Request $request)
+    {
+        $query = Song::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        $searchSongs = $query->get();
+        $songs = Song::all();
+        $albums = Album::all();
+        $genres = Genre::all();
+        $artists = User::role('artist')->get();
+
+        return view('users.search', compact('searchSongs', 'songs', 'albums', 'genres', 'artists'));
+    }
+
+
     // create song page
     public function create() {
         $genres = Genre::all();

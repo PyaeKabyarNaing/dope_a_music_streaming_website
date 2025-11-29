@@ -13,11 +13,8 @@ use Illuminate\Support\Facades\Route;
 // })->name('home');
 
 Route::get('/album', [AlbumController::class, 'index'])->name('album.index');
-// Route::get('/album/create', [AlbumController::class, 'create'])->name('album.create');
 
-// Route::get('/album/create', function () {
-//     return view('albums.create');
-// })->name('album.create');
+Route::get('/search', [SongController::class, 'search'])->name('search');
 
 Route::get('/detail', function () {
     return view('songs.detail');
