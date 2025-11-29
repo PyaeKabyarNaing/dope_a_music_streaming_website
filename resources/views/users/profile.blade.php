@@ -25,7 +25,7 @@
                 </h2>
 
                 <p class="text-purple-500 dark:text-purple-500">
-                    {{ strtoupper(auth()->user()->getRoleNames()->first()) }}
+                    {{ strtoupper($artist->getRoleNames()->first()) }}
 
                 </p>
             </div>
@@ -61,22 +61,25 @@
         <div class="tab-content" id="songs">
             <h1 class="text-2xl font-bold mb-4">{{ $artist->name }}'s Songs</h1>
             @foreach ($songs as $index => $song)
-                <div class="flex items-center gap-3 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded cursor-pointer song-item"
-                    data-index="{{ $index }}">
-                    @if ($song->cover_image)
-                        <img src="{{ asset('storage/' . $song->cover_image) }}" alt="{{ $song->name }}"
-                            class="w-10 h-10 object-cover rounded-md" />
-                    @else
-                        <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded-md" />
-                    @endif
-                    <div class="flex flex-col">
-                        <span class="font-semibold text-sm text-gray-900 dark:text-white">{{ $song->name }}</span>
-                        <span class="text-sm text-gray-500 dark:text-gray-400">{{ $artist->name }}</span>
+                <a href="{{ route('song.show', $song) }}">
+                    <div class="flex items-center gap-3 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded cursor-pointer song-item"
+                        data-index="{{ $index }}">
+                        @if ($song->cover_image)
+                            <img src="{{ asset('storage/' . $song->cover_image) }}" alt="{{ $song->name }}"
+                                class="w-10 h-10 object-cover rounded-md" />
+                        @else
+                            <img src="https://via.placeholder.com/40" class="w-10 h-10 object-cover rounded-md" />
+                        @endif
+                        <div class="flex flex-col">
+                            <span
+                                class="font-semibold text-sm text-gray-900 dark:text-white">{{ $song->name }}</span>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">{{ $artist->name }}</span>
+                        </div>
+                        <a href="{{ route('song.edit', $song->id) }}" class="">
+                            <x-icons.edit-icon />
+                        </a>
                     </div>
-                    <a href="{{ route('song.edit', $song->id) }}" class="">
-                        <x-icons.edit-icon />
-                    </a>
-                </div>
+                </a>
             @endforeach
         </div>
 

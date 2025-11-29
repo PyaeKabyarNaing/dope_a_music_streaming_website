@@ -1,5 +1,25 @@
 <x-app-layout>
     <div class="max-w-2xl mx-auto p-6 rounded-2xl shadow-md mt-10">
+
+        @if (session()->has('success'))
+            <div id="flash-message" class="w-full bg-green-300 text-black text-center p-4 mb-4 rounded-md">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <script>
+            const flash = document.getElementById('flash-message');
+
+            if (flash) {
+                setTimeout(() => {
+                    flash.style.transition = "opacity 0.5s";
+                    flash.style.opacity = "0";
+
+                    setTimeout(() => flash.remove(), 500);
+                }, 3000);
+            }
+        </script>
+
         <header class="text-center text-2xl font-bold">
             Add Album
         </header>

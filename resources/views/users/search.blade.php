@@ -7,20 +7,22 @@
                 <p class="mb-4">Found {{ $searchSongs->count() }} results for "{{ request('search') }}"</p>
                 <ul class="space-y-2">
                     @foreach ($searchSongs as $song)
-                        <li class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-                            <div class="flex items-center">
-                                @if ($song->cover_image)
-                                    <img src="{{ asset('storage/' . $song->cover_image) }}" alt="{{ $song->cover_name }}"
-                                        class="w-12 h-12 rounded-md mr-4 object-cover">
-                                @endif
-                                <div>
-                                    <h3 class="font-semibold">{{ $song->name }}</h3>
-                                    @if ($song->artist_name)
-                                        <p class="text-gray-600 dark:text-gray-400">{{ $song->artist_name }}</p>
+                        <a href="{{ route('song.show', $song) }}">
+                            <li class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                                <div class="flex items-center">
+                                    @if ($song->cover_image)
+                                        <img src="{{ asset('storage/' . $song->cover_image) }}"
+                                            alt="{{ $song->cover_name }}" class="w-12 h-12 rounded-md mr-4 object-cover">
                                     @endif
+                                    <div>
+                                        <h3 class="font-semibold">{{ $song->name }}</h3>
+                                        @if ($song->artist_name)
+                                            <p class="text-gray-600 dark:text-gray-400">{{ $song->artist_name }}</p>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        </a>
                     @endforeach
                 </ul>
             @else
