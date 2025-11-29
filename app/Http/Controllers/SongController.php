@@ -6,7 +6,7 @@ use App\Models\Genre;
 use App\Models\Album;
 use App\Models\Song;
 use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 
@@ -44,31 +44,12 @@ class SongController extends Controller
         ]);
     }
 
-    // posting new song
-    // public function store() {
-    //     $validator = validator(request()->all(), [
-    //         "title" => "required",
-    //         "body" => "required",
-    //         "category_id" => "required",
-    //     ]);
+    public function edit(Song $song) {
+        $genres = Genre::all();
+        $albums = Album::where('user_id', auth()->id())->get();
 
-    //     if($validator->fails()) {
-    //         return back()->withErrors($validator);
-    //     }
-
-    //     $song = new Song;
-    //     $song->name = request()->name;
-    //     $song->artist_name = request()->artist_name;
-    //     $song->ft_artist_name = request()->ft_artist_name ?? null;
-    //     $song->cover_image = request()->cover_image ?? null;
-    //     $song->audio_file = request()->audio_file;
-    //     $song->album_id = request()->album_id ?? null;
-    //     $song->user_id = Auth::id();
-    //     $song->save();
-
-    //     return redirect()->route('song.create')->with('success', 'Song uploaded successfully!');
-    // }
-
+        return view('songs.edit', compact('song', 'genres', 'albums'));
+    }
 
     public function store(Request $request) {
         $request->validate([
@@ -80,11 +61,6 @@ class SongController extends Controller
             "genre_id" => "required",
             "album_id" => "nullable",
         ]);
-
-        // $coverPath = null;
-        // if ($request->hasFile('cover_image')) {
-        //     $coverPath = $request->file('cover_image')->store('images', 'public');
-        // }
 
         if ($request->hasFile('cover_image')) {
         $cover = $request->file('cover_image');
@@ -120,4 +96,54 @@ class SongController extends Controller
 
         return redirect()->route('song.create')->with('success', 'Song uploaded successfully!');
     }
+
+    public function update(Request $request, $id)
+{ $song = Song::findOrFail($id);
+    $request->validate([
+        "name" => "required",
+        "artist_name" => "required",
+        "ft_artist_name" => "nullable",
+        "cover_image" => "nullable|image|mimes:jpeg,png,jpg|max:2048",
+        "audio_file" => "nullable|mimes:mp3,wav,ogg|max:10240",
+        "genre_id" => "required",
+        "album_id" => "nullable",
+    ]);
+
+    // COVER IMAGE
+    if ($request->hasFile('cover_image')) {
+        if ($song->cover_image && Storage::disk('public')->exists($song->cover_image)) {
+            Storage::disk('public')->delete($song->cover_image);
+        }
+        $cover = $request->file('cover_image');
+        $coverName = uniqid().'.'.$cover->getClientOriginalExtension();
+        $cover->storeAs('images', $coverName, 'public');
+        $song->cover_image = 'images/'.$coverName;
+    }
+
+    // AUDIO FILE
+    if ($request->hasFile('audio_file')) {
+        if ($song->audio_file && Storage::disk('public')->exists($song->audio_file)) {
+            Storage::disk('public')->delete($song->audio_file);
+        }
+        $audio = $request->file('audio_file');
+        $audioName = uniqid().'.'.$audio->getClientOriginalExtension();
+        $audio->storeAs('songs', $audioName, 'public');
+        $song->audio_file = 'songs/'.$audioName;
+    }
+
+    // TEXT FIELDS
+    $song->name = $request->name;
+    $song->artist_name = $request->artist_name;
+    $song->ft_artist_name = $request->ft_artist_name;
+    $song->genre_id = $request->genre_id;
+    $song->album_id = $request->album_id;
+
+    // KEEP EXISTING USER
+    // do NOT change $song->user_id
+
+    $song->save();
+
+    return back()->with('success', 'Song updated successfully!');
+}
+
 }

@@ -1,7 +1,7 @@
 <x-app-layout>
 
     @if (session()->has('success'))
-        <div id="flash-message" class="w-full bg-green-500 text-white p-4 mb-4 rounded-md">
+        <div id="flash-message" class="w-full bg-green-300 text-black text-center p-4 mb-4 rounded-md">
             {{ session('success') }}
         </div>
     @endif
@@ -123,78 +123,5 @@
                 @endif
             </div>
         </form>
-
-        {{-- <h2 class="text-2xl font-bold mb-6 text-center">Upload a New Song</h2>
-
-    @if (session('success'))
-        <div class="mb-4 p-3 text-green-800 bg-green-100 rounded-lg">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <form action="{{ route('song.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
-        @csrf
-
-        <!-- Title -->
-        <div>
-            <label class="block font-medium mb-1">Song Title</label>
-            <input type="text" name="name" value="{{ old('name') }}"
-                   class="dark:text-black w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-200" required>            @error('title') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
-        </div>
-
-        <!-- Artist Name -->
-        <div>
-            <label class="block font-medium mb-1">Artist Name</label>
-            <input type="text" name="artist_name" value="{{ old('artist_name') }}"
-                   class="dark:text-black w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-200" required>            @error('title') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
-        </div>
-
-        <!-- Ft Artist Name -->
-        <div>
-            <label class="block font-medium mb-1">Featuring Artist Name</label>
-            <input type="text" name="ft_artist_name" value="{{ old('ft_artist_name') }}"
-                   class="dark:text-black w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-200" required>            @error('title') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
-        </div>
-
-        <!-- Genre -->
-        <select name="genre_id" class="form-select mb-2 dark:text-black">
-            @foreach ($genres as $genre)
-            <option value="{{ $genre->id}}">{{ $genre->name}}</option>
-                
-            @endforeach
-        </select> --}}
-
-        <!-- Genre old -->
-        {{-- <div>
-            <label class="block font-medium mb-1">Genre</label>
-            <input type="text" name="genre" value="{{ old('genre') }}"
-                   class="dark:text-black w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-blue-200" required>
-            @error('genre') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
-        </div> --}}
-
-        <!-- Cover Image -->
-        {{-- <div>
-            <label class="block font-medium mb-1">Cover Image (optional)</label>
-            <input type="file" name="cover_image" accept="image/*"
-                   class="w-full border border-gray-300 rounded-lg p-2">
-            @error('cover_image') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
-        </div>
-
-        <!-- Audio File -->
-        <div>
-            <label class="block font-medium mb-1">Audio File</label>
-            <input type="file" name="audio_file" accept="audio/*"
-                   class="w-full border border-gray-300 rounded-lg p-2" required>
-            @error('audio_file') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
-        </div>
-
-        <!-- Submit -->
-        <div class="text-center">
-            <button type="submit"
-                class="w-full px-6 py-2 bg-purple text-white rounded-lg hover:bg-purple-700 transition">
-                Upload Song
-            </button>
-        </div>
-    </form> --}}
     </div>
 </x-app-layout>

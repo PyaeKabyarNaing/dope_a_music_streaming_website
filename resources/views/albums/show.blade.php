@@ -1,5 +1,4 @@
 <x-app-layout>
-    {{-- @include('layouts.audiobar') --}}
     <!-- listbar -->
     @include('layouts.listbar')
 
@@ -14,7 +13,8 @@
             <img src="{{ asset('storage/' . $album->cover_image) }}" alt="{{ $album->name }}"
                 class="w-64 h-64 object-cover rounded-xl shadow-lg">
         @else
-            <div class="w-64 h-64 object-cover rounded-xl shadow-lg bg-slate-400"></div>
+            <img src="{{ asset('storage/' . $song->cover_image) }}" alt="{{ $song->name }}"
+                class="w-64 h-64 object-cover rounded-xl shadow-lg">
         @endif
     </div>
 
@@ -67,28 +67,23 @@
     <!-- Comment Section -->
     <div class="h-64 overflow-y-auto pr-2">
 
-        {{-- @foreach ($album->songs as $song) --}}
         <!-- Add Comment -->
-        <form action="{{ route('comment.store') }}" method="POST" class="mb-4">
+        <form id="comment-form" class="mb-4">
             @csrf
             <textarea name="content" rows="2" class="w-full p-2 border rounded-md focus:ring focus:ring-purple-300 text-black"
                 placeholder="Add a comment..."></textarea>
-            <input type="hidden" name="song_id" value="{{ $song->id }}">
+            <input id="comment-song-id" type="hidden" name="song_id" value="">
 
             <x-secondary-button>Comment</x-secondary-button>
         </form>
 
-        <!-- Display Comments -->
-        @foreach ($album->songs as $song)
-            <div class="mb-4 pb-2 border-b border-gray-200">
-                @foreach ($song->comments as $comment)
-                    <p class="font-semibold">{{ $comment->user->name }}</p>
-                    <p class="text-gray-700">{{ $comment->content }}</p>
-                    <p class="text-xs text-gray-400">{{ $comment->created_at->diffForHumans() }}</p>
-                @endforeach
-            </div>
-        @endforeach
+        <h1 class="text-xl font-bold mb-3">
+            Comments
+        </h1>
 
+        <!-- Display Comments -->
+
+        <div id="comment-section"></div>
     </div>
 
     <script>
@@ -111,5 +106,87 @@
             }
         });
     </script>
+
+    {{-- for comment --}}
+    <script>
+        function loadComments(songId) {
+            fetch(`/song/${songId}/comments`)
+                .then(res => res.json())
+                .then(comments => {
+                    const box = document.getElementById("comment-section");
+                    box.innerHTML = ""; // clear old comments
+
+                    if (comments.length === 0) {
+                        box.innerHTML = `<p class="text-gray-500">No comments yet.</p>`;
+                        return;
+                    }
+
+                    comments.forEach(c => {
+                        box.innerHTML += `
+                    <div class="mb-4 pb-2 border-b border-gray-200">
+                        <p class="font-semibold">${c.content}</p>
+                        <p class="text-gray-400">by ${c.user.name}</p>
+                        <p class="text-xs text-gray-400">${new Date(c.created_at).toLocaleString()}</p>
+                    </div>
+                `;
+                    });
+                });
+        }
+
+        // When player changes the song
+        window.addEventListener("songChanged", (e) => {
+            const song = e.detail;
+
+            // Change hidden input to current song ID
+            document.getElementById("comment-song-id").value = song.id;
+
+            loadComments(song.id);
+        });
+
+        // Load comments for first song on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            if (window.albumData.songs.length > 0) {
+                const firstSongId = window.albumData.songs[0].id;
+                document.getElementById("comment-song-id").value = firstSongId;
+                loadComments(firstSongId);
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById("comment-form").addEventListener("submit", function(e) {
+            e.preventDefault(); // prevent page reload
+
+            const songId = document.getElementById("comment-song-id").value;
+            const content = this.querySelector("textarea[name='content']").value;
+            const token = this.querySelector("input[name='_token']").value;
+
+            fetch("{{ route('comment.store') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": token
+                    },
+                    body: JSON.stringify({
+                        song_id: songId,
+                        content: content
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        // Clear textarea
+                        this.querySelector("textarea[name='content']").value = "";
+
+                        // Reload comments for current song
+                        loadComments(songId);
+                    } else {
+                        alert("Error posting comment");
+                    }
+                })
+                .catch(err => console.log(err));
+        });
+    </script>
+
 
 </x-app-layout>

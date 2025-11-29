@@ -23,8 +23,8 @@ class SongFactory extends Factory
             'cover_image' => 'images/69281e28b7a43.jpg',
             'audio_file' => 'songs/69281e28b9412.mp3',
             'genre_id' => rand(1, 13),
-            'album_id' => rand(1, 2),
-            'user_id' => 3,
+            'album_id' => rand(1, 6),
+            'user_id' => rand(3, 11),
         ];
     }
 }

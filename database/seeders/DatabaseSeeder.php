@@ -29,15 +29,16 @@ class DatabaseSeeder extends Seeder
             'name' => 'Alice',
             'email' => 'alice@example.com',
         ]);
-        User::factory()->create([
-            'name' => 'Test Artist',
-            'email' => 'tartist@example.com',
-            'image' => 'images/6929178b22723.jpg',
-        ]);
+    
         User::factory()->create([
             'name' => 'Queen',
             'email' => 'queen@example.com',
             'image' => 'images/69291652d9060.jpg',
+        ]);
+        User::factory()->create([
+            'name' => 'Test Artist',
+            'email' => 'tartist@example.com',
+            'image' => 'images/692424182bb26.png',
         ]);
         User::factory()->create([
             'name' => 'Sia',
@@ -94,7 +95,39 @@ class DatabaseSeeder extends Seeder
             'user_id' => 3,
         ]);
         Album::create([
-            'name' => 'Another Album',
+            'name' => 'Summer Album',
+            'artist_name' => 'Queen',
+            'cover_image' => 'images/69253a2548f0e.jpg',
+            'description' => 'des',
+            'release_year' => 2000,
+            'user_id' => 3,
+        ]);
+        Album::create([
+            'name' => 'This Album',
+            'artist_name' => 'Queen',
+            'cover_image' => 'images/69253a2548f0e.jpg',
+            'description' => 'des',
+            'release_year' => 2000,
+            'user_id' => 3,
+        ]);
+        Album::create([
+            'name' => 'That Album',
+            'artist_name' => 'Queen',
+            'cover_image' => 'images/69253a2548f0e.jpg',
+            'description' => 'des',
+            'release_year' => 2000,
+            'user_id' => 3,
+        ]);
+        Album::create([
+            'name' => 'Just An Album',
+            'artist_name' => 'Another Queen',
+            'cover_image' => 'images/69253a2548f0e.jpg',
+            'description' => 'des',
+            'release_year' => 2000,
+            'user_id' => 3,
+        ]);
+        Album::create([
+            'name' => 'Not Boring Album',
             'artist_name' => 'Another Queen',
             'cover_image' => 'images/69253a2548f0e.jpg',
             'description' => 'des',
@@ -110,7 +143,7 @@ class DatabaseSeeder extends Seeder
             'audio_file' => 'songs/69253a254aba0.mp3',
             'album_id' => 1,
             'genre_id' => Genre::where('name', 'Rock')->first()->id,
-            'user_id' => 3,
+            'user_id' => 4,
         ]);
         Song::create([
             'name' => 'Snowman',
@@ -119,7 +152,7 @@ class DatabaseSeeder extends Seeder
             'audio_file' => 'songs/69281e28b9412.mp3',
             'album_id' => 1,
             'genre_id' => Genre::where('name', 'Pop')->first()->id,
-            'user_id' => 3,
+            'user_id' => 5,
         ]);
 
         Song::create([
@@ -129,7 +162,17 @@ class DatabaseSeeder extends Seeder
             'audio_file' => 'songs/69281d7123dec.mp3',
             'album_id' => 1,
             'genre_id' => Genre::where('name', 'Pop')->first()->id,
-            'user_id' => 3,
+            'user_id' => 6,
+        ]);
+
+        Song::create([
+            'name' => 'M.A.A.D City',
+            'artist_name' => 'Kendrick Lamar',
+            'cover_image' => 'images/Maad_City.jpeg',
+            'audio_file' => 'songs/69294882d9704.mp3',
+            'album_id' => 1,
+            'genre_id' => Genre::where('name', 'Pop')->first()->id,
+            'user_id' => 8,
         ]);
 
         $this->call(SongSeeder::class);

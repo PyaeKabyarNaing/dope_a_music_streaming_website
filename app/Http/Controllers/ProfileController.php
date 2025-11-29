@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Song;
+use App\Models\Album;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -17,7 +19,8 @@ class ProfileController extends Controller
     {
         $artist = User::findOrFail($id);
         $songs = Song::where('user_id', $id)->get();
-        return view('users.profile', compact('artist', 'songs'));
+        $albums = Album::where('user_id', $id)->get();
+        return view('users.profile', compact('artist', 'songs', 'albums'));
     }
 
     /**
@@ -35,7 +38,23 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        // $request->user()->fill($request->validated());
+
+        $user = $request->user();
+
+        $user->fill($request->validated());
+
+        // Handle image upload
+    if ($request->hasFile('image')) {
+        // Delete old image if exists
+        if ($user->image) {
+            Storage::disk('public')->delete($user->image);
+        }
+
+        // Store new image
+        $path = $request->file('image')->store('profile-images', 'public');
+        $user->image = $path;
+    }
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;

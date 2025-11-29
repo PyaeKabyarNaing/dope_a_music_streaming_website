@@ -1,7 +1,7 @@
 <x-app-layout>
 
     @if (session()->has('success'))
-        <div id="flash-message" class="w-full bg-green-500 text-white p-4 mb-4 rounded-md">
+        <div id="flash-message" class="w-full bg-green-300 text-black text-center p-4 mb-4 rounded-md">
             {{ session('success') }}
         </div>
     @endif
@@ -109,14 +109,14 @@
 
             <!-- each artist -->
             @foreach ($artists as $artist)
-                <div
+                <a href="{{ route('user.profile', $artist->id) }}"
                     class="min-w-[150px] cursor-pointer hover:bg-[#ffffff26] m-2 mx-2 flex flex-col justify-center items-center">
                     <div class="w-[150px] h-[150px] rounded-full overflow-hidden">
                         <img class="w-full h-full object-cover" src="{{ asset('storage/' . $artist->image) }}"
                             alt="profile">
                     </div>
                     <div class="font-bold mt-3 mb-1">{{ $artist->name }}</div>
-                </div>
+                </a>
             @endforeach
         </div>
     </div>

@@ -8,17 +8,20 @@ use App\Models\Comment as UserComment;
 use Dom\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AlbumController extends Controller
 {
     public function show(Album $album)
     {
         $album = Album::with('songs', 'user', 'songs.comments.user')->findOrFail($album->id);
+        $allSongs = Song::all();
 
         return view('albums.show', [
         'album' => $album,
         'songs' => $album->songs,
         'user' => $album->user,
+        'allSongs' => $allSongs,
     ]);
     }
 
@@ -61,11 +64,70 @@ class AlbumController extends Controller
             ->with('success', 'Album created successfully!');
     }
 
-    // Optional: List all albums for logged-in user
-    // public function index()
-    // {
-    //     $albums = Album::where('user_id', Auth::id())->get();
+    public function edit(Album $album)
+    {
+        $allSongs = Song::all();
 
-    //     return view('albums.index', compact('albums'));
-    // }
+        return view('albums.edit', compact('album', 'allSongs'));
+    }
+
+    public function update(Request $request, Album $album)
+{
+    $request->validate([
+        'name' => 'required',
+        'artist_name' => 'required',
+        'cover_image' => 'nullable|image',
+        'description' => 'nullable',
+        'release_year' => 'nullable',
+        'songs' => 'nullable|array', // for syncing songs
+    ]);
+
+    // Handle cover image
+    if ($request->hasFile('cover_image')) {
+        // Delete old image if exists
+        if ($album->cover_image && Storage::disk('public')->exists($album->cover_image)) {
+            Storage::disk('public')->delete($album->cover_image);
+        }
+
+        $cover = $request->file('cover_image');
+        $coverName = uniqid() . '.' . $cover->getClientOriginalExtension();
+        $cover->storeAs('images', $coverName, 'public');
+        $album->cover_image = 'images/' . $coverName;
+    }
+
+    $album->name = $request->name;
+    $album->artist_name = $request->artist_name;
+    $album->description = $request->description;
+    $album->release_year = $request->release_year;
+    $album->save();
+
+    // Sync songs if any
+    if ($request->has('songs')) {
+        $album->songs()->sync($request->songs); // attach selected songs, remove others
+    }
+
+    return redirect()->route('album.edit', $album->id)
+        ->with('success', 'Album updated successfully!');
+}
+
+public function addSong(Request $request, Album $album)
+{
+    $song = Song::find($request->song_id);
+    if ($song) {
+        $song->album_id = $album->id; // assign the album
+        $song->save();
+    }
+    return back()->with('success', 'Song added to album!');
+}
+
+public function removeSong(Album $album, Song $song)
+{
+    if ($song->album_id == $album->id) {
+        $song->album_id = null; // remove from album
+        $song->save();
+    }
+    return back()->with('success', 'Song removed.');
+}
+
+
 }

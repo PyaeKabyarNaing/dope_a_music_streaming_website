@@ -16,6 +16,13 @@ class CommentController extends Controller
         // return view('songs.detail', compact('song'));
     }
 
+    public function fetch($id)
+    {
+        $song = Song::with('comments.user')->findOrFail($id);
+        return response()->json($song->comments);
+    }
+
+
     public function store(Request $request) {
         $request->validate([
             'content' => 'required',
@@ -28,6 +35,10 @@ class CommentController extends Controller
         $comment->user_id = Auth::id();
         $comment->save();
 
-        return back()->with('success', 'Comment added!');
+        // return back()->with('success', 'Comment added!');
+        return response()->json([
+        'success' => true,
+        'comment' => $comment->load('user')
+    ]);
     }
 }
