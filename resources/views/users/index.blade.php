@@ -92,7 +92,7 @@
                         </div> --}}
                         <img class="w-[160px] h-[160px] overflow-hidden bg-red-400 flex justify-center items-center font-bold text-xl rounded-xl object-cover"
                             src="{{ asset('storage/' . $song->cover_image) }}" alt="">
-                        <p class="font-bold mt-2 mb-1">{{ $song->name }}</p>
+                        <p class="font-bold mt-2 mb-1">{{ $song->user->name }} - {{ $song->name }}</p>
                         <p class="text-sm">{{ $song->user->name ?? 'Unknown Artist' }}</p>
                     </div>
                 </a>

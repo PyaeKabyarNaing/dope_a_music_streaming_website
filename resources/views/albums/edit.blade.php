@@ -53,32 +53,22 @@
                 <x-input-error :messages="$errors->get('cover_image')" class="mt-2" />
             </div>
 
-            <!-- Songs in Album -->
-            <div>
-                <x-input-label value="Songs in this Album" />
-                @foreach ($album->songs as $song)
-                    <div class="flex justify-between items-center bg-gray-100 p-2 rounded-lg mt-2 text-black">
-                        <span class="text-black">{{ $song->name }}</span>
-                        <form method="post" action="{{ route('album.removeSong', [$album->id, $song->id]) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-500">Remove</button>
-                        </form>
-                    </div>
-                @endforeach
-            </div>
-
             <!-- Add Songs -->
+            <!-- Add Songs with Checkboxes -->
             <div>
-                <x-input-label value="Add Songs" />
-                <select name="songs[]" multiple class="w-full mt-2 border rounded p-2">
+                <x-input-label value="Add/Remove Songs from Album" />
+                <div
+                    class="mt-2 max-h-60 overflow-y-auto border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-900">
                     @foreach ($allSongs as $song)
-                        <option class="text-black" value="{{ $song->id }}"
-                            @if ($album->songs->contains($song->id)) selected @endif>
-                            {{ $song->name }}
-                        </option>
+                        <label class="flex items-center space-x-3 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded">
+                            <input type="checkbox" name="songs[]" value="{{ $song->id }}"
+                                @if ($album->songs->contains($song->id)) checked @endif
+                                class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                            <span class="text-black dark:text-white">{{ $song->name }}</span>
+                        </label>
                     @endforeach
-                </select>
+                </div>
+                <p class="text-sm text-gray-500 mt-1">Check songs to add to album, uncheck to remove</p>
             </div>
 
             <!-- Submit -->
@@ -95,5 +85,20 @@
                 @endif
             </div>
         </form>
+        <!-- Songs in Album -->
+        <div>
+            <x-input-label value="Songs in this Album" />
+            @foreach ($album->songs as $song)
+                <div class="flex justify-between items-center bg-gray-100 p-2 rounded-lg mt-2 text-black">
+                    <span class="text-black">{{ $song->name }}</span>
+                    <form method="post"
+                        action="{{ route('album.removeSong', ['album' => $album->id, 'song' => $song->id]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-500">Remove</button>
+                    </form>
+                </div>
+            @endforeach
+        </div>
     </div>
 </x-app-layout>

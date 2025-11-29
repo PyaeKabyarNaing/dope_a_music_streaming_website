@@ -83,16 +83,24 @@ class SongController extends Controller
         $audio->storeAs('songs', $audioName, 'public');
     }
 
-        Song::create([
+        $song = Song::create([
             'name' => $request->name,
             'artist_name' => $request->artist_name,
             'ft_artist_name' => $request->ft_artist_name,
             'genre_id' => $request->genre_id,
-            'album_id' => $request->album_id,
+            // 'album_id' => $request->album_id,
             'cover_image' => isset($coverName) ? ('images/' . $coverName) : null,
             'audio_file' => 'songs/' . $audioName,
             'user_id' => Auth::id(),
         ]);
+        // if ($request->has('album_ids')) {
+        // $song->albums()->attach($request->album_ids);
+        // }
+        if ($request->has('album_ids') && array_filter($request->album_ids)) {
+    $song->albums()->sync($request->album_ids); // attach selected albums
+} else {
+    $song->albums()->detach(); // no albums selected
+}
 
         return redirect()->route('song.create')->with('success', 'Song uploaded successfully!');
     }
@@ -136,7 +144,12 @@ class SongController extends Controller
     $song->artist_name = $request->artist_name;
     $song->ft_artist_name = $request->ft_artist_name;
     $song->genre_id = $request->genre_id;
-    $song->album_id = $request->album_id;
+    // $song->album_id = $request->album_id;
+    if ($request->has('album_ids')) {
+    $song->albums()->sync($request->album_ids); // replaces old associations
+} else {
+    $song->albums()->detach(); // remove all if none selected
+}
 
     // KEEP EXISTING USER
     // do NOT change $song->user_id

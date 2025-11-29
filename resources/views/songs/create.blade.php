@@ -94,7 +94,7 @@
             </div>
 
             <!-- Album -->
-            <div>
+            {{-- <div>
                 <x-input-label for="album_id" :value="__('Album (Optional)')" />
                 <select id="album_id" name="album_id"
                     class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white">
@@ -107,7 +107,23 @@
                     @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('album_id')" class="mt-2" />
+            </div> --}}
+            <div>
+                <x-input-label for="album_ids" :value="__('Albums (Optional)')" />
+                <select id="album_ids" name="album_ids[]" multiple
+                    class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white">
+                    <option value="">No album</option>
+
+                    @foreach ($albums as $album)
+                        <option value="{{ $album->id }}"
+                            {{ (isset($song) && $song->albums->contains($album->id)) || collect(old('album_ids'))->contains($album->id) ? 'selected' : '' }}>
+                            {{ $album->name }}
+                        </option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('album_ids')" class="mt-2" />
             </div>
+
 
             <!-- Submit -->
             <div class="flex items-center gap-4">

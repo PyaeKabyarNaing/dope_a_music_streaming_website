@@ -63,11 +63,10 @@ Route::middleware(['auth', 'role:artist'])->group(function () {
     
     Route::get('/album/upload', [AlbumController::class, 'create'])->name('album.create');
     Route::post('/album', [AlbumController::class, 'store'])->name('album.store');
+    Route::delete('/album/{album}/song/{song}', [AlbumController::class, 'removeSong'])->name('album.removeSong');
     Route::get('/album/{album}/edit', [AlbumController::class, 'edit'])->name('album.edit');
 Route::put('/album/{album}', [AlbumController::class, 'update'])->name('album.update');
 Route::post('/album/{album}/song', [AlbumController::class, 'addSong'])->name('album.addSong');
-Route::delete('/album/{album}/song/{song}', [AlbumController::class, 'removeSong'])->name('album.removeSong');
-
 });
 
 Route::get('/album/{album}', [AlbumController::class, 'show'])->name('album.show');

@@ -103,7 +103,7 @@ class AlbumController extends Controller
 
     // Sync songs if any
     if ($request->has('songs')) {
-        $album->songs()->sync($request->songs); // attach selected songs, remove others
+        $album->songs()->sync($request->songs);
     }
 
     return redirect()->route('album.edit', $album->id)
@@ -113,21 +113,22 @@ class AlbumController extends Controller
 public function addSong(Request $request, Album $album)
 {
     $song = Song::find($request->song_id);
-    if ($song) {
-        $song->album_id = $album->id; // assign the album
-        $song->save();
+    if ($song && !$album->songs->contains($song->id)) {
+        // $song->album_id = $album->id;
+        // $song->save();
+        $album->songs()->attach($song->id);
+
     }
     return back()->with('success', 'Song added to album!');
 }
 
 public function removeSong(Album $album, Song $song)
 {
-    if ($song->album_id == $album->id) {
-        $song->album_id = null; // remove from album
-        $song->save();
+    if ($album->songs->contains($song->id)) {
+        // $song->album_id = null;
+        // $song->save();
+        $album->songs()->detach($song->id);
     }
-    return back()->with('success', 'Song removed.');
+    return redirect()->route('album.edit', $album)->with('success', 'Song removed successfully.');
 }
-
-
 }

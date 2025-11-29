@@ -1,5 +1,5 @@
 <x-app-layout>
-
+    @include('layouts.audiobar')
     <!-- Song Name Header -->
     <h1 class="text-2xl font-bold mb-6">
         {{ $song->name }}

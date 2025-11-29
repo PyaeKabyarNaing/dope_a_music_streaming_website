@@ -21,10 +21,16 @@ class Song extends Model
         'user_id',
     ];
 
-    public function album()
+    // public function album()
+    // {
+    //     return $this->belongsTo(Album::class);
+    // }
+
+    public function albums()
     {
-        return $this->belongsTo(Album::class);
+        return $this->belongsToMany(Album::class, 'album_song');
     }
+
 
     public function user()
     {

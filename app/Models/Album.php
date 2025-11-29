@@ -15,9 +15,14 @@ class Album extends Model
         'user_id'
     ];
 
+    // public function songs()
+    // {
+    //     return $this->hasMany(Song::class);
+    // }
+
     public function songs()
     {
-        return $this->hasMany(Song::class);
+        return $this->belongsToMany(Song::class, 'album_song');
     }
 
     public function user()

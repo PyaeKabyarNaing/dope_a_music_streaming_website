@@ -176,5 +176,20 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(SongSeeder::class);
+
+        $album1 = Album::find(1);
+        $album1->songs()->attach([1, 2, 3, 4]);
+
+        $album2 = Album::find(2);
+        $album2->songs()->attach([1, 2]);
+
+        $albums = Album::where('id', '>', 0)->get();
+        $songs = Song::all();
+
+        $albums->each(function ($album) use ($songs) {
+            $randomSongs = $songs->random(rand(1, 54))->pluck('id');
+            $album->songs()->attach($randomSongs);
+        });
+
     }
 }

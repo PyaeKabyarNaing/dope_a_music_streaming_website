@@ -45,7 +45,7 @@
         </main>
 
         <!-- audio player -->
-        @include('layouts.audiobar')
+        {{-- @include('layouts.audiobar') --}}
     </div>
 
     <script src="{{ asset('js/player.js') }}"></script>
